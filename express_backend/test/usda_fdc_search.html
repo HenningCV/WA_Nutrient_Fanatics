@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>USDA FDC Search</title>
+</head>
+<body>
+    <div id="container"></div>
+</body>
+<script>
+    var foodSearchParam = 'Apple';
+    var apiKey = 'Xxb4xFDH9WKXigQ6yxhYdknrwHKW2U1kcSlNhAWJ';
+
+    fetch(`https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${apiKey}&query=${foodSearchParam}`)
+        .then((response) =>
+        {
+        return response.json();
+        })
+        .then((data) =>
+        {
+            for (var i = 0; i < data.foods.length; i++)
+            {
+                var div = document.createElement("div");
+                div.innerHTML = data.foods[i].fdcId;
+                container.appendChild(div);
+            }
+        })
+        .catch(function (err) { console.log("Unable to fetch -", err);
+        }); </script>
+</html>
