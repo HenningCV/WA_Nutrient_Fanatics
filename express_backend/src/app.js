@@ -4,6 +4,10 @@ import express from 'express';
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
+import mongoose from "mongoose";
+
+await mongoose.connect('mongodb://root:example@mongo:27017')
+
 import cors from "cors";
 
 const app = express();
