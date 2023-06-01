@@ -5,26 +5,23 @@
     <title>USDA FDC Search</title>
 </head>
 <body>
-    <div id="container"></div>
+<div id="container"></div>
 </body>
 <script>
     let foodSearchParam = 'Apple';
     let apiKey = 'Xxb4xFDH9WKXigQ6yxhYdknrwHKW2U1kcSlNhAWJ';
 
     fetch(`https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${apiKey}&query=${foodSearchParam}`)
-        .then((response) =>
-        {
-        return response.json();
+        .then((response) => {
+            return response.json();
         })
-        .then((data) =>
-        {
-            for (let i = 0; i < data.foods.length; i++)
-            {
-                let div = document.createElement("div");
-                div.innerHTML = data.foods[i].fdcId;
-                container.appendChild(div);
-            }
+        .then((data) => {
+
+            let div = document.createElement("div");
+            div.innerHTML = data.foods[0].fdcId;
+            container.appendChild(div);
         })
-        .catch(function (err) { console.log("Unable to fetch -", err);
+        .catch(function (err) {
+            console.log("Unable to fetch -", err);
         }); </script>
 </html>
