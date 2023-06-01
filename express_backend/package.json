@@ -1,17 +1,19 @@
 {
-  "name": "express_backend_nutrient_fanatics",
+  "name": "express_backend_derFruehUndDerSpaetAufsteher",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js"
   },
   "author": "Venhorst, Henning; Hengelhaupt, Lucas",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "mongoose": "^7.2.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.3"
-  }
+  },
+  "type": "module"
 }
