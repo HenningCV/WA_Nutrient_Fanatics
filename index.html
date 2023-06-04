@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Der Früh und der Spätaufsteher</title>
+</head>
+
+<body>
+    <div id="homepage"></div>
+
+    <div id="recipes"></div>
+</body>
+
+<script>
+    // home
+    let homepage = document.getElementById("homepage");
+    fetch(`http://localhost:3000/home`)
+        .then((res) => res.text())
+        .then((res) => {
+            let paragraph = document.createElement("p");
+            paragraph.innerHTML = res;
+            homepage.appendChild(paragraph);
+        })
+    .catch(function (err) {
+        console.log("Unable to fetch - ", err);
+    });
+
+    // recipes
+    let recipes = document.getElementById("recipes");
+    fetch(`http://localhost:3000/recipes`)
+        .then((res) => res.text())
+        .then((res) => {
+            let paragraph = document.createElement("p");
+            paragraph.innerHTML = res;
+            recipes.appendChild(paragraph);
+        })
+        .catch(function (err) {
+            console.log("Unable to fetch - ", err);
+        });
+</script>
+</html>
