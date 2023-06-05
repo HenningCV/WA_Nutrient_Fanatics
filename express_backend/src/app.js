@@ -1,25 +1,37 @@
-import express from 'express';
-
-
+// General
+import cors from "cors";
+import express, {request, response} from 'express';
+import mongoose from "mongoose";
+// Swagger
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+// Custom
+import { router as homeRouter } from './routes/home.js'
+import { router as recipesRouter } from './routes/recipes.js'
 
-import mongoose from "mongoose";
 
-await mongoose.connect('mongodb://root:example@mongo:27017')
-
-import cors from "cors";
-
+// Variables
 const app = express();
+const port = 3000;
+
+const homeRoute = '/home';
+const recipesRoute = '/recipes';
+
+
+await mongoose.connect('mongodb://root:example@mongo:27017/')
+
 
 app.use(cors({ origin:true }));
 
-import {router as greetingsRouter} from './routes/greeting.js'
 
-const port = 3000;
+app.use(homeRoute, homeRouter);
+app.use(recipesRoute, recipesRouter);
 
-app.use("/greetings", greetingsRouter);
+app.get('/', (req, res) => res.redirect(homeRoute));
 
+
+//
+// Swagger
 const options = {
     definition: {
         openapi: "3.0.1",
@@ -45,6 +57,8 @@ app.use(
     swaggerUi.serve,
     swaggerUi.setup(specs)
 );
+
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
