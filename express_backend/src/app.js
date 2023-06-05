@@ -18,10 +18,11 @@ const homeRoute = '/home';
 const recipesRoute = '/recipes';
 
 
-await mongoose.connect('mongodb://root:example@mongo:27017')
+await mongoose.connect('mongodb://root:example@mongo:27017/')
 
 
 app.use(cors({ origin:true }));
+
 
 app.use(homeRoute, homeRouter);
 app.use(recipesRoute, recipesRouter);
