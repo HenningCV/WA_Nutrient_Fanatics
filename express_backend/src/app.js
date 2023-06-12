@@ -1,6 +1,6 @@
 // General
 import cors from "cors";
-import express, {request, response} from 'express';
+import express from 'express';
 import mongoose from "mongoose";
 // Swagger
 import swaggerJsDoc from 'swagger-jsdoc';
@@ -12,23 +12,23 @@ import { router as recipesRouter } from './routes/recipes.js'
 
 // Variables
 const app = express();
-const port = 3000;
 
+const port = 3000;
 const homeRoute = '/home';
 const recipesRoute = '/recipes';
 
+// Middleware
 app.use(express.json());
-
-
-await mongoose.connect('mongodb://root:example@mongo:27017/')
-
 
 app.use(cors({ origin:true }));
 
+// DB
+await mongoose.connect('mongodb://root:example@mongo:27017/')
 
+// Routes
 app.use(homeRoute, homeRouter);
 app.use(recipesRoute, recipesRouter);
-
+// Redirect
 app.get('/', (req, res) => res.redirect(homeRoute));
 
 

@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-import { Recipe } from "../models/recipe.js";
-import { getRecipe, createRecipe, updateRecipe } from "../controller/recipeController.js";
+import { getRecipe, createRecipe, updateRecipe, deleteRecipe } from "../controller/recipeController.js";
+
 
 const router = Router();
 
@@ -13,5 +13,8 @@ router.post('/', createRecipe);
 
 // update recipe by id
 router.patch('/:id', updateRecipe);
+
+// delete recipe by id
+router.delete('/:id', deleteRecipe);
 
 export { router };
