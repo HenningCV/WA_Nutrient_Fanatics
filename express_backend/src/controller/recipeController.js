@@ -1,6 +1,5 @@
 import { Recipe } from "../models/recipe.js";
 
-import express from "express";
 
 /**
  * @swagger
