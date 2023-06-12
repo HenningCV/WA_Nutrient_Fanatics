@@ -6,7 +6,7 @@ const objectId = schema.ObjectId;
 const recipeSchema = new schema({
     author: objectId,
     title: String,
-    body: String,
+    desc: String,
     date: Date
 });
 
