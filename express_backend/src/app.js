@@ -17,6 +17,8 @@ const port = 3000;
 const homeRoute = '/home';
 const recipesRoute = '/recipes';
 
+app.use(express.json());
+
 
 await mongoose.connect('mongodb://root:example@mongo:27017/')
 
