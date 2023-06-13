@@ -15,6 +15,7 @@ const app = express();
 app.use(cors({ origin:true }));
 
 import {router as greetingsRouter} from './routes/greeting.js'
+import {router as usdaRouter} from './routes/usda_api.js'
 
 const port = 3000;
 
@@ -45,6 +46,8 @@ app.use(
     swaggerUi.serve,
     swaggerUi.setup(specs)
 );
+
+app.use("/usda", usdaRouter)
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
