@@ -7,6 +7,13 @@ services:
       - "3000:3000"
     build: ./express_backend
 
+  recipes:
+    container_name: recipes_SS_23_derFruehUndDerSpaetAufsteher
+    ports:
+      - "27001:27001"
+    build: ./express_backend/recipes
+
+
   # mongodb
   mongo:
     container_name: SS_23_derFruehUndDerSpaetAufsteher_mongoDB
