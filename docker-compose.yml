@@ -13,6 +13,11 @@ services:
       - "27001:27001"
     build: ./express_backend/recipes
 
+  calories:
+    container_name: calories_SS_23_derFruehUndDerSpaetAufsteher
+    ports:
+      - "27002:27002"
+    build: ./express_backend/calories
 
   # mongodb
   mongo:
