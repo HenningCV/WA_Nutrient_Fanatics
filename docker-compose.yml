@@ -19,6 +19,12 @@ services:
       - "27002:27002"
     build: ./express_backend/calories
 
+  ingredients:
+    container_name: ingredients_SS_23_derFruehUndDerSpaetAufsteher
+    ports:
+      - "27003:27003"
+    build: ./express_backend/ingredients
+
   # mongodb
   mongo:
     container_name: SS_23_derFruehUndDerSpaetAufsteher_mongoDB
