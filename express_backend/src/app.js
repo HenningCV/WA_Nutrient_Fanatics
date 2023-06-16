@@ -5,10 +5,11 @@ import mongoose from "mongoose";
 // Swagger
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-// Custom
+// Routers
 import { router as homeRouter } from './routes/home.js'
+import { router as ipRouter } from './routes/ip_api.js'
 import { router as recipesRouter } from './routes/recipes.js'
-import {router as usdaRouter} from './routes/usda_api.js'
+import { router as usdaRouter } from './routes/usda_api.js'
 
 
 // Variables
@@ -18,6 +19,7 @@ const port = 3000;
 const homeRoute = '/home';
 const recipesRoute = '/recipes';
 const usdaRoute = '/usda'
+const ipRoute = '/ip';
 
 // Middleware
 app.use(express.json());
@@ -31,6 +33,7 @@ await mongoose.connect('mongodb://root:example@mongo:27017/')
 app.use(homeRoute, homeRouter);
 app.use(recipesRoute, recipesRouter);
 app.use(usdaRoute, usdaRouter);
+app.use(ipRoute, ipRouter);
 // Redirect
 app.get('/', (req, res) => res.redirect(homeRoute));
 
