@@ -15,7 +15,7 @@ import { Recipe } from "../models/recipe.js";
  *         required: true
  *         description: ID of the receipt to get
  *     responses:
- *       '201':
+ *       '200':
  *         description: A recipe object
  *         content:
  *           application/json:
@@ -34,6 +34,8 @@ import { Recipe } from "../models/recipe.js";
  *                 date:
  *                   type: date
  *                   example: 2023-06-12T09:11:10.303Z
+ *       '204':
+ *         description: No recipe for the given ID was found
  */
 export const getRecipe = (req, res) => {
     const id = req.params.id;
