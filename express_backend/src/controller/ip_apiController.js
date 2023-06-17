@@ -20,13 +20,10 @@ let distance = '';
  *       '200':
  *         description: The user IP
  *         content:
- *           application/json:
+ *           text/plain:
  *             schema:
- *               type: object
- *               properties:
- *                 user_ip:
- *                   type: string
- *                   example: 93.230.152.51
+ *               type: string
+ *               example: 93.230.152.51
  */
 // Get User-IP
 export const getUserIP = async (req, res) => {
@@ -41,15 +38,16 @@ export const getUserIP = async (req, res) => {
     })
         .then(response => response.json())
         .then(response => {
-            user_ip = response["ipAddress"];
+            user_ip = response['ipAddress'];
             console.log('UserIP: ' + user_ip);
 
-            return res.status(200).json({ user_ip: user_ip });
+            return res.status(200).json(user_ip);
         })
-        .catch(function (err) {
-            console.log('Error fetching user-IP: ', err);
+        .catch(error => {
+            console.log('Error fetching user-IP: ', error);
         });
 };
+
 
 /**
  * @swagger
@@ -87,8 +85,8 @@ export const convertIPIntoCoordinates = async (req, res) => {
     })
         .then(response => response.json())
         .then(response => {
-            user_latitude  = response["latitude"];
-            user_longitude = response["longitude"];
+            user_latitude  = response['latitude'];
+            user_longitude = response['longitude'];
             console.log('Lat: '+ user_latitude + ' | Long: ' + user_longitude);
 
             return res.status(200).json({
@@ -96,10 +94,11 @@ export const convertIPIntoCoordinates = async (req, res) => {
                 user_longitude: user_longitude
             });
         })
-        .catch(function (err) {
-            console.log('Error fetching coordinates: ', err);
+        .catch(error => {
+            console.log('Error fetching coordinates: ', error);
         });
 }
+
 
 /**
  * @swagger
@@ -111,13 +110,10 @@ export const convertIPIntoCoordinates = async (req, res) => {
  *       '200':
  *         description: Distance to the next supermarket
  *         content:
- *           application/json:
+ *           text/plain:
  *             schema:
- *               type: object
- *               properties:
- *                 distance:
- *                   type: string
- *                   example: 2.09
+ *               type: float
+ *               example: 2.09
  */
 // Convert User-IP into Geo-Coordinates
 export const calculateDistance = async (req, res) => {
@@ -141,12 +137,12 @@ export const calculateDistance = async (req, res) => {
     await fetch(url, options)
         .then(response => response.json())
         .then(response => {
-            distance = response["distance"];
+            distance = response['distance'];
             console.log('Distance: ' + distance + 'km');
 
-            return res.status(200).json({ distance: distance });
+            return res.status(200).json(distance);
         })
-        .catch(function (err) {
-            console.log('Error fetching distance: ', err);
+        .catch(error => {
+            console.log('Error fetching distance: ', error);
         });
 }
