@@ -28,7 +28,7 @@ services:
   # mongodb
   mongo:
     container_name: SS_23_derFruehUndDerSpaetAufsteher_mongoDB
-    image: mongo
+    image: mongo:4.4
     restart: always
     ports:
       - "27017:27017"
