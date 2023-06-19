@@ -5,25 +5,25 @@ services:
     container_name: SS_23_derFruehUndDerSpaetAufsteher_express
     ports:
       - "3000:3000"
-    build: ./express_backend
+    build: ./backend
 
   recipes:
     container_name: recipes_SS_23_derFruehUndDerSpaetAufsteher
     ports:
       - "20073:20073"
-    build: ./express_backend/recipes
+    build: ./backend/recipes
 
   calories:
     container_name: calories_SS_23_derFruehUndDerSpaetAufsteher
     ports:
       - "20074:20074"
-    build: ./express_backend/calories
+    build: ./backend/calories
 
   ingredients:
     container_name: ingredients_SS_23_derFruehUndDerSpaetAufsteher
     ports:
       - "20075:20075"
-    build: ./express_backend/ingredients
+    build: ./backend/ingredients
 
   # mongodb
   mongo:
