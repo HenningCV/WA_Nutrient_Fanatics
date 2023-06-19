@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cors({ origin:true }));
 
 // DB
-await mongoose.connect('mongodb://root:example@mongo:27017/')
+await mongoose.connect('mongodb://root:example@ss2023_wa_derfruehundderspaetaufsteher_database:27017/')
 
 
 //
