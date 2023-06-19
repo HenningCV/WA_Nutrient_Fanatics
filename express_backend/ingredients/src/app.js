@@ -9,7 +9,7 @@ import swaggerUi from 'swagger-ui-express';
 // Variables
 const app = express();
 
-const port = 27003
+const port = 20075
 
 // Middleware
 app.use(express.json());
@@ -33,7 +33,7 @@ const options = {
     },
     servers: [
         {
-            url: 'http://localhost:27003',
+            url: 'http://localhost:20075',
             description: 'Development server',
         },
     ],

@@ -10,19 +10,19 @@ services:
   recipes:
     container_name: recipes_SS_23_derFruehUndDerSpaetAufsteher
     ports:
-      - "27001:27001"
+      - "20073:20073"
     build: ./express_backend/recipes
 
   calories:
     container_name: calories_SS_23_derFruehUndDerSpaetAufsteher
     ports:
-      - "27002:27002"
+      - "20074:20074"
     build: ./express_backend/calories
 
   ingredients:
     container_name: ingredients_SS_23_derFruehUndDerSpaetAufsteher
     ports:
-      - "27003:27003"
+      - "20075:20075"
     build: ./express_backend/ingredients
 
   # mongodb
