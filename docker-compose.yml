@@ -1,28 +1,29 @@
 version: '3'
 
 services:
-  express:
-    container_name: SS_23_derFruehUndDerSpaetAufsteher_express
-    ports:
-      - "3000:3000"
-    build: ./backend
-
-  recipes:
-    container_name: recipes_SS_23_derFruehUndDerSpaetAufsteher
+  
+  ss2023_wa_derfruehundderspaetaufsteher_recipe:
+    container_name: ss2023_wa_derfruehundderspaetaufsteher_recipe
     ports:
       - "20073:20073"
+    networks:
+      - ss2023_wa_derfruehundderspaetaufsteher
     build: ./backend/recipes
 
-  calories:
-    container_name: calories_SS_23_derFruehUndDerSpaetAufsteher
+  ss2023_wa_derfruehundderspaetaufsteher_calories:
+    container_name: ss2023_wa_derfruehundderspaetaufsteher_calories
     ports:
       - "20074:20074"
+    networks:
+      - ss2023_wa_derfruehundderspaetaufsteher
     build: ./backend/calories
 
-  ingredients:
-    container_name: ingredients_SS_23_derFruehUndDerSpaetAufsteher
+  ss2023_wa_derfruehundderspaetaufsteher_ingredients:
+    container_name: ss2023_wa_derfruehundderspaetaufsteher_ingredients
     ports:
       - "20075:20075"
+    networks:
+      - ss2023_wa_derfruehundderspaetaufsteher
     build: ./backend/ingredients
 
   # mongodb
