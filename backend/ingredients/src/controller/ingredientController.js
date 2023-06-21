@@ -182,7 +182,7 @@ export const createIngredient = async (req, res) => {
  *                   type: Number
  *                   example: 14.03
  */
-export const deleteRecipe = async (req, res) => {
+export const deleteIngredient = async (req, res) => {
     const fdcId = req.params['fdcId'];
 
     try {
