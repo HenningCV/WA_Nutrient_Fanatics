@@ -22,10 +22,10 @@ const ingredientSchema = new schema({
         type: Number,
         required: true,
     },
-    carbs_in_g: {
+    carb_in_g: {
         type: Number,
         required: true,
     }
 })
 
-export const ingredient = mongoose.model('Ingredient', ingredientSchema);
+export const Ingredient = mongoose.model('Ingredient', ingredientSchema);
