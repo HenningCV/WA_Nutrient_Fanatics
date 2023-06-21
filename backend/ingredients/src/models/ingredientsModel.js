@@ -1,11 +1,14 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose from "mongoose";
 
 
 const schema = mongoose.Schema;
-const objectId = schema.ObjectId;
 
 const ingredientSchema = new schema({
-    fdcId: objectId,
+    fdcId: {
+        type: Number,
+        required: true,
+        unique: true,
+        },
     name: {
         type: String,
         required: true,
