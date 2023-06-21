@@ -45,7 +45,7 @@ import { Ingredient } from "../models/ingredientsModel.js";
  *         description: No ingredient for the given ID was found
  */
 export const getIngredient = (req, res) => {
-    const id = req.params['id'];
+    const id = req.params['fdcId'];
 
     Ingredient.findById(id)
         .then(ingredient => {
@@ -123,9 +123,9 @@ export const createIngredient = async (req, res) => {
         fdcId: req.body['fdcId'],
         name: req.body['name'],
         kcal: req.body['kcal'],
-        protein_in_g: req.body['protein'],
-        fat_in_g: req.body['fat'],
-        carb_in_g: req.body['carb']
+        protein_in_g: req.body['protein in g'],
+        fat_in_g: req.body['fat in g'],
+        carb_in_g: req.body['carb in g']
     });
 
     res.status(201).json(newIngredient);

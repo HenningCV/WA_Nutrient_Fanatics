@@ -6,12 +6,12 @@ import { getIngredient, createIngredient,  deleteIngredient } from "../controlle
 const router = Router();
 
 // get recipe by id
-router.get('/:id', getIngredient);
+router.get('/:fdcId', getIngredient);
 
 // create recipe
 router.post('/', createIngredient);
 
 // delete recipe by id
-router.delete('/:id', deleteIngredient);
+router.delete('/:fdcId', deleteIngredient);
 
 export { router };
