@@ -5,9 +5,13 @@ import mongoose from "mongoose";
 // Swagger
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+//Routers
+import {router as ingredientRouter} from './routes/ingredientRouter.js'
 
 // Variables
 const app = express();
+
+const ingredientRoute = '/ingredient'
 
 const port = 20075
 
@@ -19,6 +23,8 @@ app.use(cors({ origin:true }));
 // DB
 await mongoose.connect('mongodb://root:example@ss2023_wa_derfruehundderspaetaufsteher_database:27017/')
 
+// Routes
+app.use(ingredientRoute, ingredientRouter);
 
 //
 // Swagger
@@ -28,7 +34,7 @@ const options = {
         info: {
             title: "Express API with Swagger",
             version: "0.1.0",
-            description: "This is a simple CRUD API application made with Express and documented with Swagger",
+            description: "This is an ingredient CRUD API application made with Express and documented with Swagger",
         },
     },
     servers: [
@@ -51,5 +57,5 @@ app.use(
 
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Ingredients app listening at http://localhost:${port}`)
 })
