@@ -11,20 +11,22 @@ import {router as ingredientRouter} from './routes/ingredientRouter.js'
 // Variables
 const app = express();
 
-const ingredientRoute = '/ingredient'
+const ingredientRoute = '/ingredients'
 
 const port = 20075
 
 // Middleware
 app.use(express.json());
 
-app.use(cors({ origin:true }));
+app.use(cors({origin: true}));
 
 // DB
 await mongoose.connect('mongodb://root:example@ss2023_wa_derfruehundderspaetaufsteher_database:27017/')
 
 // Routes
 app.use(ingredientRoute, ingredientRouter);
+
+app.get("/", (req, res) => res.redirect(ingredientRoute));
 
 //
 // Swagger
@@ -53,7 +55,6 @@ app.use(
     swaggerUi.serve,
     swaggerUi.setup(specs)
 );
-
 
 
 app.listen(port, () => {

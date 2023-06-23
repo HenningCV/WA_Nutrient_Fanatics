@@ -31,4 +31,4 @@ const ingredientSchema = new schema({
     }
 })
 
-export const Ingredient = mongoose.model('Ingredient', ingredientSchema);
+export const Ingredient = mongoose.model('Ingredients', ingredientSchema);

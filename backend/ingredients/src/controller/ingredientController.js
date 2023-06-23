@@ -117,7 +117,6 @@ export const getIngredient = (req, res) => {
  *                   example: 14.03
  */
 export const createIngredient = async (req, res) => {
-    //console.log(Object.keys(req));
 
     const newIngredient = new Ingredient({
         fdcId: req.body['fdcId'],
@@ -127,8 +126,6 @@ export const createIngredient = async (req, res) => {
         fat_in_g: req.body['fat in g'],
         carb_in_g: req.body['carb in g']
     });
-
-    res.status(201).json(newIngredient);
 
     try {
         const savedIngredient = await newIngredient.save();
