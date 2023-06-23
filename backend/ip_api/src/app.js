@@ -5,19 +5,32 @@ import mongoose from "mongoose";
 // Swagger
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+// Router
+import { router as ip_apiRouter } from './routes/ip_api.js';
 
+
+//
 // Variables
 const app = express();
 
 const port = 20077;
+const ip_apiRoute = '/ip';
 
+//
 // Middleware
 app.use(express.json());
 
 app.use(cors({ origin:true }));
 
+//
 // DB
 await mongoose.connect('mongodb://root:example@ss2023_wa_derfruehundderspaetaufsteher_database:27017/');
+
+//
+// Routes
+app.use(ip_apiRoute, ip_apiRouter);
+// Redirect
+app.get('/', (req, res) => res.redirect(ip_apiRouter));
 
 
 //
@@ -33,7 +46,7 @@ const options = {
     },
     servers: [
         {
-            url: 'http://localhost:20077',
+            url: `http://localhost:${port}`,
             description: 'Development server',
         },
     ],
@@ -51,5 +64,5 @@ app.use(
 
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`IP-API is listening at http://localhost:${port}`)
 });
