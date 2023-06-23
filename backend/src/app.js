@@ -8,7 +8,7 @@ import swaggerUi from 'swagger-ui-express';
 // Routers
 import { router as homeRouter } from './routes/home.js'
 import { router as ipRouter } from './routes/ip_api.js'
-import { router as recipesRouter } from './routes/recipes.js'
+import { router as recipesRouter } from '../recipes/src/routes/recipes.js'
 import { router as usdaRouter } from './routes/usda_api.js'
 
 
