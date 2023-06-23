@@ -26,6 +26,15 @@ services:
       - ss2023_wa_derfruehundderspaetaufsteher
     build: ./backend/ingredients
 
+  # IP API
+  ss2023_wa_derfruehundderspaetaufsteher_ip_api:
+    container_name: ss2023_wa_derfruehundderspaetaufsteher_ip_api
+    ports:
+      - "20077:20077"
+    networks:
+      - ss2023_wa_derfruehundderspaetaufsteher
+    build: ./backend/ip_api
+
   # mongodb
   ss2023_wa_derfruehundderspaetaufsteher_database:
     container_name: ss2023_wa_derfruehundderspaetaufsteher_database
