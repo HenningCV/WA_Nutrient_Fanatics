@@ -5,19 +5,32 @@ import mongoose from "mongoose";
 // Swagger
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+// Router
+import { router as recipesRouter } from './routes/recipes.js';
 
+
+//
 // Variables
 const app = express();
 
-const port = 20073
+const port = 20073;
+const recipesRoute = '/recipes';
 
+//
 // Middleware
 app.use(express.json());
 
 app.use(cors({ origin:true }));
 
+//
 // DB
-await mongoose.connect('mongodb://root:example@ss2023_wa_derfruehundderspaetaufsteher_database:27017/')
+await mongoose.connect('mongodb://root:example@ss2023_wa_derfruehundderspaetaufsteher_database:27017/');
+
+//
+// Routes
+app.use(recipesRoute, recipesRouter);
+// Redirect
+app.get('/', (req, res) => res.redirect(recipesRoute));
 
 
 //
@@ -52,4 +65,4 @@ app.use(
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
-})
+});
