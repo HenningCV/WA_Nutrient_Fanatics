@@ -147,7 +147,7 @@ export const createRecipe = async (req, res) => {
         ingredientAmountsInGram: req.body['ingredientAmountsInGram']
     });
 
-    res.status(201).json(newRecipe);
+    // check if recipe already exist
 
     try {
         const savedRecipe = await newRecipe.save();
