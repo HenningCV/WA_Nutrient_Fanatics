@@ -7,18 +7,27 @@ const objectId = schema.ObjectId;
 
 const recipeSchema = new schema({
     author: objectId,
-    title: {
+    name: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     desc: {
         type: String,
         required: true,
     },
-    date: {
-        type: Date,
-        required: false
+    imagePath: {
+        type: String,
+        required: false,
+        default: '../images/scrambled_eggs.jpg',
+    },
+    ingredientIds: {
+        type: [Number],
+        required: true,
+    },
+    ingredientAmountsInGram: {
+        type: [Number],
+        required: true,
     },
 });
 

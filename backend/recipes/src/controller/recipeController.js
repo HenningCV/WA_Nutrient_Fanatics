@@ -16,24 +16,36 @@ import { Recipe } from "../models/recipe.js";
  *         description: ID of the receipt to get
  *     responses:
  *       '200':
- *         description: A recipe object
+ *         description: Recipe object
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 id:
+ *                 _id:
  *                   type: string
  *                   example: 6486e12e1848915af487e38d
- *                 title:
+ *                 name:
  *                   type: string
  *                   example: Scrambled Eggs
  *                 desc:
  *                   type: string
  *                   example: 4 eggs, salt, pepper
- *                 date:
- *                   type: date
- *                   example: 2023-06-12T09:11:10.303Z
+ *                 imagePath:
+ *                   type: string
+ *                   example: ../images/scrambled_eggs.jpg
+ *                 ingredientIds:
+ *                   type: array
+ *                   items:
+ *                     type: integer
+ *                   minItems: 1
+ *                   example: [100001, 100002, 100003]
+ *                 ingredientAmountsInGram:
+ *                   type: array
+ *                   items:
+ *                     type: integer
+ *                   minItems: 1
+ *                   example: [50, 1400, 360]
  *       '204':
  *         description: No recipe for the given ID was found
  */
@@ -43,7 +55,7 @@ export const getRecipe = (req, res) => {
     Recipe.findById(id)
         .then(recipe => {
             if (recipe) {
-                console.log('Recipe found: ', recipe['title']);
+                console.log('Recipe found: ', recipe['name']);
                 return res.status(200).json({ recipe: recipe });
             }
             else {
@@ -70,10 +82,27 @@ export const getRecipe = (req, res) => {
  *           schema:
  *             type: object
  *             properties:
- *               title:
+ *               name:
  *                 type: string
+ *                 example: Scrambled Eggs
  *               desc:
  *                 type: string
+ *                 example: 4 eggs, salt, pepper
+ *               imagePath:
+ *                 type: string
+ *                 example: ../images/scrambled_eggs.jpg
+ *               ingredientIds:
+ *                 type: array
+ *                 items:
+ *                   type: integer
+ *                 minItems: 1
+ *                 example: [100001, 100002, 100003]
+ *               ingredientAmountsInGram:
+ *                 type: array
+ *                 items:
+ *                   type: integer
+ *                 minItems: 1
+ *                 example: [50, 1400, 360]
  *     responses:
  *       '201':
  *         description: The created recipe object
@@ -82,27 +111,43 @@ export const getRecipe = (req, res) => {
  *             schema:
  *               type: object
  *               properties:
- *                 id:
+ *                 _id:
  *                   type: string
  *                   example: 6486e12e1848915af487e38d
- *                 title:
+ *                 name:
  *                   type: string
  *                   example: Scrambled Eggs
  *                 desc:
  *                   type: string
  *                   example: 4 eggs, salt, pepper
- *                 date:
- *                   type: date
- *                   example: 2023-06-12T09:11:10.303Z
+ *                 imagePath:
+ *                   type: string
+ *                   example: ../images/scrambled_eggs.jpg
+ *                 ingredientIds:
+ *                   type: array
+ *                   items:
+ *                     type: integer
+ *                   minItems: 1
+ *                   example: [100001, 100002, 100003]
+ *                 ingredientAmountsInGram:
+ *                   type: array
+ *                   items:
+ *                     type: integer
+ *                   minItems: 1
+ *                   example: [50, 1400, 360]
  */
 export const createRecipe = async (req, res) => {
     //console.log(Object.keys(req));
 
-    const newRecipe = new Recipe({ title: req.body['title'],
-                                    desc: req.body['desc'],
-                                    date: Date.now() });
+    const newRecipe = new Recipe({
+        name: req.body['name'],
+        desc: req.body['desc'],
+        imagePath: req.body['imagePath'],
+        ingredientIds: req.body['ingredientIds'],
+        ingredientAmountsInGram: req.body['ingredientAmountsInGram']
+    });
 
-    res.status(201).json(newRecipe);
+    // check if recipe already exist
 
     try {
         const savedRecipe = await newRecipe.save();
@@ -136,10 +181,25 @@ export const createRecipe = async (req, res) => {
  *           schema:
  *             type: object
  *             properties:
- *               title:
+ *               name:
  *                 type: string
  *               desc:
  *                 type: string
+ *               imagePath:
+ *                 type: string
+ *                 example: ../images/scrambled_eggs.jpg
+ *               ingredientIds:
+ *                 type: array
+ *                 items:
+ *                   type: integer
+ *                 minItems: 1
+ *                 example: [100001, 100002, 100003]
+ *               ingredientAmountsInGram:
+ *                 type: array
+ *                 items:
+ *                   type: integer
+ *                 minItems: 1
+ *                 example: [50, 1400, 360]
  *     responses:
  *       '200':
  *         description: The updated recipe object
@@ -148,27 +208,41 @@ export const createRecipe = async (req, res) => {
  *             schema:
  *               type: object
  *               properties:
- *                 id:
+ *                 _id:
  *                   type: string
  *                   example: 6486e12e1848915af487e38d
- *                 title:
+ *                 name:
  *                   type: string
  *                   example: Scrambled Eggs
  *                 desc:
  *                   type: string
  *                   example: 4 eggs, salt, pepper
- *                 date:
- *                   type: date
- *                   example: 2023-06-12T09:11:10.303Z
+ *                 imagePath:
+ *                   type: string
+ *                   example: ../images/scrambled_eggs.jpg
+ *                 ingredientIds:
+ *                   type: array
+ *                   items:
+ *                     type: integer
+ *                   minItems: 1
+ *                   example: [100001, 100002, 100003]
+ *                 ingredientAmountsInGram:
+ *                   type: array
+ *                   items:
+ *                     type: integer
+ *                   minItems: 1
+ *                   example: [50, 1400, 360]
  */
 export const updateRecipe = async (req, res) => {
     const recipeId = req.params['id'];
 
     try {
         const recipe = await Recipe.findByIdAndUpdate(recipeId, {
-            title: req.body['title'],
-            desc:  req.body['desc'],
-            date:  Date.now(),
+            name:                   req.body['name'],
+            desc:                    req.body['desc'],
+            imagePath:               req.body['imagePath'],
+            ingredientIds:           req.body['ingredientIds'],
+            ingredientAmountsInGram: req.body['ingredientAmountsInGram']
         }, { new: true });
 
         console.log('Recipe updated: ', recipe);
@@ -200,18 +274,30 @@ export const updateRecipe = async (req, res) => {
  *               schema:
  *                 type: object
  *                 properties:
- *                   id:
+ *                   _id:
  *                     type: string
  *                     example: 6486e12e1848915af487e38d
- *                   title:
+ *                   name:
  *                     type: string
  *                     example: Scrambled Eggs
  *                   desc:
  *                     type: string
  *                     example: 4 eggs, salt, pepper
- *                   date:
- *                     type: date
- *                     example: 2023-06-12T09:11:10.303Z
+ *                   imagePath:
+ *                     type: string
+ *                     example: ../images/scrambled_eggs.jpg
+ *                   ingredientIds:
+ *                     type: array
+ *                     items:
+ *                       type: integer
+ *                     minItems: 1
+ *                     example: [100001, 100002, 100003]
+ *                   ingredientAmountsInGram:
+ *                     type: array
+ *                     items:
+ *                       type: integer
+ *                     minItems: 1
+ *                     example: [50, 1400, 360]
  */
 export const deleteRecipe = async (req, res) => {
     const recipeId = req.params['id'];
