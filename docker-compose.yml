@@ -2,6 +2,20 @@ version: '3'
 
 services:
 
+  # FRONTEND REACT
+  ss2023_wa_derfruehundderspaetaufsteher_frontend:
+    container_name: ss2023_wa_derfruehundderspaetaufsteher_frontend
+    ports:
+      - "20071:20071"
+    networks:
+      - ss2023_wa_derfruehundderspaetaufsteher
+    build: ./frontend
+    depends_on:
+      - ss2023_wa_derfruehundderspaetaufsteher_recipe
+      - ss2023_wa_derfruehundderspaetaufsteher_calories
+      - ss2023_wa_derfruehundderspaetaufsteher_ingredients
+
+  # RECIPES API
   ss2023_wa_derfruehundderspaetaufsteher_recipe:
     container_name: ss2023_wa_derfruehundderspaetaufsteher_recipe
     ports:
@@ -10,8 +24,9 @@ services:
       - ss2023_wa_derfruehundderspaetaufsteher
     build: ./backend/recipes
     depends_on:
-      - ss2023_wa_derfruehundderspaetaufsteher_database
+      - mongo-express
 
+  # CALORIES API
   ss2023_wa_derfruehundderspaetaufsteher_calories:
     container_name: ss2023_wa_derfruehundderspaetaufsteher_calories
     ports:
@@ -20,8 +35,9 @@ services:
       - ss2023_wa_derfruehundderspaetaufsteher
     build: ./backend/calories
     depends_on:
-      - ss2023_wa_derfruehundderspaetaufsteher_database
+      - mongo-express
 
+  # INGREDIENTS API
   ss2023_wa_derfruehundderspaetaufsteher_ingredients:
     container_name: ss2023_wa_derfruehundderspaetaufsteher_ingredients
     ports:
@@ -30,9 +46,19 @@ services:
       - ss2023_wa_derfruehundderspaetaufsteher
     build: ./backend/ingredients
     depends_on:
-      - ss2023_wa_derfruehundderspaetaufsteher_database
+      - mongo-express
 
-  # mongodb
+  # IP API
+  ss2023_wa_derfruehundderspaetaufsteher_ip_api:
+    container_name: ss2023_wa_derfruehundderspaetaufsteher_ip_api
+    ports:
+      - "20077:20077"
+    networks:
+      - ss2023_wa_derfruehundderspaetaufsteher
+    build: ./backend/ip_api
+
+
+  # MONGODB
   ss2023_wa_derfruehundderspaetaufsteher_database:
     container_name: ss2023_wa_derfruehundderspaetaufsteher_database
     image: mongo:4.4
@@ -44,10 +70,10 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+
+  # MONGO-EXPRESS
   mongo-express:
     image: mongo-express
-    depends_on:
-      - ss2023_wa_derfruehundderspaetaufsteher_database
     restart: always
     ports:
       - "20076:8081"
@@ -57,6 +83,8 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@ss2023_wa_derfruehundderspaetaufsteher_database:27017/
+    depends_on:
+      - ss2023_wa_derfruehundderspaetaufsteher_database
 
 networks:
   ss2023_wa_derfruehundderspaetaufsteher:

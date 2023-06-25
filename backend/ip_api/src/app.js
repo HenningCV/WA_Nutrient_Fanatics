@@ -6,15 +6,15 @@ import mongoose from "mongoose";
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 // Router
-import { router as recipesRouter } from './routes/recipes.js';
+import { router as ip_apiRouter } from './routes/ip_api.js';
 
 
 //
 // Variables
 const app = express();
 
-const port = 20073;
-const recipesRoute = '/recipes';
+const port = 20077;
+const ip_apiRoute = '/ip';
 
 //
 // Middleware
@@ -28,9 +28,9 @@ await mongoose.connect('mongodb://root:example@ss2023_wa_derfruehundderspaetaufs
 
 //
 // Routes
-app.use(recipesRoute, recipesRouter);
+app.use(ip_apiRoute, ip_apiRouter);
 // Redirect
-app.get('/', (req, res) => res.redirect(recipesRoute));
+app.get('/', (req, res) => res.redirect(ip_apiRouter));
 
 
 //
@@ -64,5 +64,5 @@ app.use(
 
 
 app.listen(port, () => {
-    console.log(`Recipes-API is listening at http://localhost:${port}`)
+    console.log(`IP-API is listening at http://localhost:${port}`)
 });

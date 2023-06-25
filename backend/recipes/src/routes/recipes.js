@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { getRecipe, createRecipe, updateRecipe, deleteRecipe } from "../controller/recipeController.js";
+import { getRecipe, createRecipe, updateRecipe, deleteRecipe } from '../controller/recipeController.js';
 
 
 const router = Router();
