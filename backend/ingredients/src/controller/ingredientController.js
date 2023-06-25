@@ -183,7 +183,7 @@ export const deleteIngredient = async (req, res) => {
     const fdcId = req.params['fdcId'];
 
     try {
-        const ingredient = await Ingredient.findByIdAndDelete(fdcId);
+        const ingredient = await Ingredient.findOneAndDelete({fdcId: fdcId});
 
         console.log('Recipe deleted: ', ingredient);
         res.status(200).json(ingredient);
