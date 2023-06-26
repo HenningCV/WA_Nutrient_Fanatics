@@ -24,7 +24,7 @@ services:
       - ss2023_wa_derfruehundderspaetaufsteher
     build: ./backend/recipes
     depends_on:
-      - mongo-express
+      - ss2023_wa_derfruehundderspaetaufsteher_database
 
   # CALORIES API
   ss2023_wa_derfruehundderspaetaufsteher_calories:
@@ -35,7 +35,7 @@ services:
       - ss2023_wa_derfruehundderspaetaufsteher
     build: ./backend/calories
     depends_on:
-      - mongo-express
+      - ss2023_wa_derfruehundderspaetaufsteher_database
 
   # INGREDIENTS API
   ss2023_wa_derfruehundderspaetaufsteher_ingredients:
@@ -46,7 +46,7 @@ services:
       - ss2023_wa_derfruehundderspaetaufsteher
     build: ./backend/ingredients
     depends_on:
-      - mongo-express
+      - ss2023_wa_derfruehundderspaetaufsteher_database
 
   # IP API
   ss2023_wa_derfruehundderspaetaufsteher_ip_api:
@@ -70,9 +70,12 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - ./database:/data/db
 
-  # MONGO-EXPRESS
+      # MONGO-EXPRESS
   mongo-express:
+    container_name: ss2023_wa_derfruehundderspaetaufsteher_mongo_express
     image: mongo-express
     restart: always
     ports:
