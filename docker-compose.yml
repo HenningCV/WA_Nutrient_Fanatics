@@ -71,7 +71,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
-      - ./database:/data/db)
+      - ./database:/data/db
 
   # MONGO-EXPRESS
   mongo-express:
@@ -91,6 +91,3 @@ services:
 
 networks:
   ss2023_wa_derfruehundderspaetaufsteher:
-
-volumes:
-  database:
