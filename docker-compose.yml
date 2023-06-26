@@ -75,6 +75,7 @@ services:
 
   # MONGO-EXPRESS
   mongo-express:
+    container_name: ss2023_wa_derfruehundderspaetaufsteher_mongo_express
     image: mongo-express
     restart: always
     ports:
