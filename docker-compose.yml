@@ -73,8 +73,9 @@ services:
     volumes:
       - ./database:/data/db
 
-      # MONGO-EXPRESS
-  mongo-express:
+
+  # MONGO-EXPRESS
+  ss2023_wa_derfruehundderspaetaufsteher_mongo_express:
     container_name: ss2023_wa_derfruehundderspaetaufsteher_mongo_express
     image: mongo-express
     restart: always
@@ -83,9 +84,10 @@ services:
     networks:
       - ss2023_wa_derfruehundderspaetaufsteher
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://root:example@ss2023_wa_derfruehundderspaetaufsteher_database:27017/
+      ME_CONFIG_MONGODB_SERVER: ss2023_wa_derfruehundderspaetaufsteher_database
+      ME_CONFIG_MONGODB_ADMINUSERNAME: "root"
+      ME_CONFIG_MONGODB_ADMINPASSWORD: "example"
+      ME_CONFIG_MONGODB_URL: "mongo://root:example@ss2023_wa_derfruehundderspaetaufsteher_database:27017/"
     depends_on:
       - ss2023_wa_derfruehundderspaetaufsteher_database
 

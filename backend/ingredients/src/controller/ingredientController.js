@@ -3,7 +3,7 @@ import { Ingredient } from "../models/ingredientsModel.js";
 
 /**
  * @swagger
- * /ingredient/{fdcId}:
+ * /ingredients/{fdcId}:
  *   get:
  *     summary: Finds an ingredient by its fdcId
  *     description: Retrieves the ingredient for a given id from the database
@@ -23,7 +23,7 @@ import { Ingredient } from "../models/ingredientsModel.js";
  *               type: object
  *               properties:
  *                 fdcId:
- *                   type: ObjectId
+ *                   type: Number
  *                   example: 454004
  *                 name:
  *                   type: string
@@ -40,7 +40,6 @@ import { Ingredient } from "../models/ingredientsModel.js";
  *                 carb_in_g:
  *                   type: Number
  *                   example: 14.3
- *
  *       '204':
  *         description: No ingredient for the given ID was found
  */
@@ -66,7 +65,63 @@ export const getIngredient = (req, res) => {
 
 /**
  * @swagger
- * /ingredient:
+ * /ingredients:
+ *   get:
+ *     summary: Finds all ingredients
+ *     description: Retrieves all ingredients in the database
+ *     parameters:
+ *     responses:
+ *       '200':
+ *         description: Ingredient objects
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   fdcId:
+ *                     type: Number
+ *                     example: 454004
+ *                   name:
+ *                     type: string
+ *                     example: Apple
+ *                   kcal:
+ *                     type: Number
+ *                     example: 52.0
+ *                   protein_in_g:
+ *                     type: Number
+ *                     example: 0.0
+ *                   fat_in_g:
+ *                     type: Number
+ *                     example: 0.65
+ *                   carb_in_g:
+ *                     type: Number
+ *                     example: 14.3
+ *       '204':
+ *         description: No ingredients found
+ */
+export const getAllIngredients = (req, res) => {
+    Ingredient.find({})
+        .then(ingredients => {
+            if (ingredients) {
+                console.log('Ingredients found: ', ingredients);
+                return res.status(200).json({ ingredients: ingredients });
+            }
+            else {
+                console.log('Ingredient not found.');
+                res.status(204).json('Ingredients do not exist.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching Ingredient: ',error);
+        });
+};
+
+
+/**
+ * @swagger
+ * /ingredients:
  *   post:
  *     summary: Add an ingredient
  *     description: Add an ingredient to the database
@@ -78,7 +133,7 @@ export const getIngredient = (req, res) => {
  *             type: object
  *             properties:
  *               fdcId:
- *                 type: ObjectId
+ *                 type: Number
  *               name:
  *                 type: string
  *               kcal:
@@ -122,9 +177,9 @@ export const createIngredient = async (req, res) => {
         fdcId: req.body['fdcId'],
         name: req.body['name'],
         kcal: req.body['kcal'],
-        protein_in_g: req.body['protein in g'],
-        fat_in_g: req.body['fat in g'],
-        carb_in_g: req.body['carb in g']
+        protein_in_g: req.body['protein_in_g'],
+        fat_in_g: req.body['fat_in_g'],
+        carb_in_g: req.body['carb_in_g']
     });
 
     try {
@@ -141,27 +196,27 @@ export const createIngredient = async (req, res) => {
 
 /**
  * @swagger
- * /ingredient/{fdcId}:
- *     delete:
- *       summary: Delete an ingredient
- *       description: Delete a ingredient from the database
- *       parameters:
- *         - in: path
- *           name: fdcId
- *           schema:
- *             type: ObjectId
- *           required: true
- *           description: fdcID of the ingredient to delete
- *       responses:
- *         '200':
- *           description: The deleted ingredient object
- *           content:
- *             application/json:
- *               schema:
- *                 type: object
- *                 properties:
- *                   fdcId:
- *                   type: ObjectId
+ * /ingredients/{fdcId}:
+ *   delete:
+ *     summary: Delete an ingredient by its fdcId
+ *     description: Retrieves the ingredient for a given id from the database
+ *     parameters:
+ *       - in: path
+ *         name: fdcId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the ingredient to delete
+ *     responses:
+ *       '200':
+ *         description: An ingredient object
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 fdcId:
+ *                   type: Number
  *                   example: 454004
  *                 name:
  *                   type: string
@@ -177,7 +232,9 @@ export const createIngredient = async (req, res) => {
  *                   example: 0.65
  *                 carb_in_g:
  *                   type: Number
- *                   example: 14.03
+ *                   example: 14.3
+ *       '204':
+ *         description: No ingredient for the given ID was found
  */
 export const deleteIngredient = async (req, res) => {
     const fdcId = req.params['fdcId'];

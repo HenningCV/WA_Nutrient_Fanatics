@@ -1,12 +1,15 @@
 import { Router } from "express";
 
-import { getRecipe, createRecipe, updateRecipe, deleteRecipe } from '../controller/recipeController.js';
+import { getRecipe, getAllRecipes, createRecipe, updateRecipe, deleteRecipe } from '../controller/recipeController.js';
 
 
 const router = Router();
 
 // get recipe by id
 router.get('/:id', getRecipe);
+
+// get all recipes
+router.get('/', getAllRecipes);
 
 // create recipe
 router.post('/', createRecipe);
