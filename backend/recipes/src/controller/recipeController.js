@@ -72,6 +72,68 @@ export const getRecipe = (req, res) => {
 /**
  * @swagger
  * /recipes:
+ *   get:
+ *     summary: Get all recipes
+ *     description: Get all existing recipes from the database
+ *     responses:
+ *       '200':
+ *         description: Recipe objects
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     example: 6486e12e1848915af487e38d
+ *                   name:
+ *                     type: string
+ *                     example: Scrambled Eggs
+ *                   desc:
+ *                     type: string
+ *                     example: 4 eggs, salt, pepper
+ *                   imagePath:
+ *                     type: string
+ *                     example: ../images/scrambled_eggs.jpg
+ *                   ingredientIds:
+ *                     type: array
+ *                     items:
+ *                       type: integer
+ *                     minItems: 1
+ *                     example: [100001, 100002, 100003]
+ *                   ingredientAmountsInGram:
+ *                     type: array
+ *                     items:
+ *                       type: integer
+ *                     minItems: 1
+ *                     example: [50, 1400, 360]
+ *       '204':
+ *         description: No recipes in database
+ */
+export const getAllRecipes = (req, res) => {
+
+    Recipe.find()
+        .then(recipes => {
+            if (recipes) {
+                console.log('Recipes found: ' + recipes);
+                return res.status(200).json(recipes);
+            }
+            else {
+                console.log('No recipes in database.');
+                res.status(204).json('No recipes in database.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching recipes: ', error);
+        });
+};
+
+
+/**
+ * @swagger
+ * /recipes:
  *   post:
  *     summary: Add a recipe
  *     description: Add a recipe to the database
@@ -252,6 +314,7 @@ export const updateRecipe = async (req, res) => {
         console.error('Error updating recipe: ', error);
     }
 };
+
 
 /**
  * @swagger

@@ -40,11 +40,9 @@ import { Ingredient } from "../models/ingredientsModel.js";
  *                 carb_in_g:
  *                   type: Number
  *                   example: 14.3
- *
  *       '204':
  *         description: No ingredient for the given ID was found
  */
-
 export const getIngredient = (req, res) => {
     const id = req.params['fdcId'];
 
@@ -62,7 +60,10 @@ export const getIngredient = (req, res) => {
         .catch(error => {
             console.error('Error fetching Ingredient: ',error);
         });
-};/**
+};
+
+
+/**
  * @swagger
  * /ingredients:
  *   get:
@@ -71,37 +72,35 @@ export const getIngredient = (req, res) => {
  *     parameters:
  *     responses:
  *       '200':
- *         description: An ingredients object
+ *         description: Ingredient objects
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 fdcId:
- *                   type: Number
- *                   example: 454004
- *                 name:
- *                   type: string
- *                   example: Apple
- *                 kcal:
- *                   type: Number
- *                   example: 52.0
- *                 protein_in_g:
- *                   type: Number
- *                   example: 0.0
- *                 fat_in_g:
- *                   type: Number
- *                   example: 0.65
- *                 carb_in_g:
- *                   type: Number
- *                   example: 14.3
- *
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   fdcId:
+ *                     type: Number
+ *                     example: 454004
+ *                   name:
+ *                     type: string
+ *                     example: Apple
+ *                   kcal:
+ *                     type: Number
+ *                     example: 52.0
+ *                   protein_in_g:
+ *                     type: Number
+ *                     example: 0.0
+ *                   fat_in_g:
+ *                     type: Number
+ *                     example: 0.65
+ *                   carb_in_g:
+ *                     type: Number
+ *                     example: 14.3
  *       '204':
  *         description: No ingredients found
  */
-
-
-
 export const getAllIngredients = (req, res) => {
     Ingredient.find({})
         .then(ingredients => {
@@ -118,6 +117,7 @@ export const getAllIngredients = (req, res) => {
             console.error('Error fetching Ingredient: ',error);
         });
 };
+
 
 /**
  * @swagger
@@ -233,7 +233,6 @@ export const createIngredient = async (req, res) => {
  *                 carb_in_g:
  *                   type: Number
  *                   example: 14.3
- *
  *       '204':
  *         description: No ingredient for the given ID was found
  */

@@ -58,5 +58,5 @@ app.use(
 
 
 app.listen(port, () => {
-    console.log(`Ingredients app listening at http://localhost:${port}`)
+    console.log(`Ingredients-API is listening at http://localhost:${port}`)
 })
