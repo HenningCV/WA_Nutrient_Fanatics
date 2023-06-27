@@ -3,7 +3,7 @@ import { Ingredient } from "../models/ingredientsModel.js";
 
 /**
  * @swagger
- * /ingredient/{fdcId}:
+ * /ingredients/{fdcId}:
  *   get:
  *     summary: Finds an ingredient by its fdcId
  *     description: Retrieves the ingredient for a given id from the database
@@ -64,7 +64,7 @@ export const getIngredient = (req, res) => {
         });
 };/**
  * @swagger
- * /ingredient/:
+ * /ingredients:
  *   get:
  *     summary: Finds all ingredients
  *     description: Retrieves all ingredients in the database
@@ -121,7 +121,7 @@ export const getAllIngredients = (req, res) => {
 
 /**
  * @swagger
- * /ingredient:
+ * /ingredients:
  *   post:
  *     summary: Add an ingredient
  *     description: Add an ingredient to the database
@@ -196,26 +196,26 @@ export const createIngredient = async (req, res) => {
 
 /**
  * @swagger
- * /ingredient/{fdcId}:
- *     delete:
- *       summary: Delete an ingredient
- *       description: Delete a ingredient from the database
- *       parameters:
- *         - in: path
- *           name: fdcId
- *           schema:
- *             type: Number
- *           required: true
- *           description: fdcID of the ingredient to delete
- *       responses:
- *         '200':
- *           description: The deleted ingredient object
- *           content:
- *             application/json:
- *               schema:
- *                 type: object
- *                 properties:
- *                   fdcId:
+ * /ingredients/{fdcId}:
+ *   delete:
+ *     summary: Delete an ingredient by its fdcId
+ *     description: Retrieves the ingredient for a given id from the database
+ *     parameters:
+ *       - in: path
+ *         name: fdcId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the ingredient to delete
+ *     responses:
+ *       '200':
+ *         description: An ingredient object
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 fdcId:
  *                   type: Number
  *                   example: 454004
  *                 name:
@@ -232,7 +232,10 @@ export const createIngredient = async (req, res) => {
  *                   example: 0.65
  *                 carb_in_g:
  *                   type: Number
- *                   example: 14.03
+ *                   example: 14.3
+ *
+ *       '204':
+ *         description: No ingredient for the given ID was found
  */
 export const deleteIngredient = async (req, res) => {
     const fdcId = req.params['fdcId'];
