@@ -70,12 +70,10 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-    volumes:
-      - ./database:/data/db
 
-      # MONGO-EXPRESS
-  mongo-express:
-    container_name: ss2023_wa_derfruehundderspaetaufsteher_mongo_express
+  # MONGO-EXPRESS
+  ss2023_wa_derfruehundderspaetaufsteher_mongo-express:
+    container_name: ss2023_wa_derfruehundderspaetaufsteher_mongo-express
     image: mongo-express
     restart: always
     ports:
