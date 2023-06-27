@@ -23,7 +23,7 @@ import { Ingredient } from "../models/ingredientsModel.js";
  *               type: object
  *               properties:
  *                 fdcId:
- *                   type: ObjectId
+ *                   type: Number
  *                   example: 454004
  *                 name:
  *                   type: string
@@ -44,6 +44,7 @@ import { Ingredient } from "../models/ingredientsModel.js";
  *       '204':
  *         description: No ingredient for the given ID was found
  */
+
 export const getIngredient = (req, res) => {
     const id = req.params['fdcId'];
 
@@ -61,8 +62,62 @@ export const getIngredient = (req, res) => {
         .catch(error => {
             console.error('Error fetching Ingredient: ',error);
         });
-};
+};/**
+ * @swagger
+ * /ingredient/:
+ *   get:
+ *     summary: Finds all ingredients
+ *     description: Retrieves all ingredients in the database
+ *     parameters:
+ *     responses:
+ *       '200':
+ *         description: An ingredients object
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 fdcId:
+ *                   type: Number
+ *                   example: 454004
+ *                 name:
+ *                   type: string
+ *                   example: Apple
+ *                 kcal:
+ *                   type: Number
+ *                   example: 52.0
+ *                 protein_in_g:
+ *                   type: Number
+ *                   example: 0.0
+ *                 fat_in_g:
+ *                   type: Number
+ *                   example: 0.65
+ *                 carb_in_g:
+ *                   type: Number
+ *                   example: 14.3
+ *
+ *       '204':
+ *         description: No ingredients found
+ */
 
+
+
+export const getAllIngredients = (req, res) => {
+    Ingredient.find({})
+        .then(ingredients => {
+            if (ingredients) {
+                console.log('Ingredients found: ', ingredients);
+                return res.status(200).json({ ingredients: ingredients });
+            }
+            else {
+                console.log('Ingredient not found.');
+                res.status(204).json('Ingredients do not exist.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching Ingredient: ',error);
+        });
+};
 
 /**
  * @swagger
@@ -78,7 +133,7 @@ export const getIngredient = (req, res) => {
  *             type: object
  *             properties:
  *               fdcId:
- *                 type: ObjectId
+ *                 type: Number
  *               name:
  *                 type: string
  *               kcal:
@@ -122,9 +177,9 @@ export const createIngredient = async (req, res) => {
         fdcId: req.body['fdcId'],
         name: req.body['name'],
         kcal: req.body['kcal'],
-        protein_in_g: req.body['protein in g'],
-        fat_in_g: req.body['fat in g'],
-        carb_in_g: req.body['carb in g']
+        protein_in_g: req.body['protein_in_g'],
+        fat_in_g: req.body['fat_in_g'],
+        carb_in_g: req.body['carb_in_g']
     });
 
     try {
@@ -149,7 +204,7 @@ export const createIngredient = async (req, res) => {
  *         - in: path
  *           name: fdcId
  *           schema:
- *             type: ObjectId
+ *             type: Number
  *           required: true
  *           description: fdcID of the ingredient to delete
  *       responses:
@@ -161,7 +216,7 @@ export const createIngredient = async (req, res) => {
  *                 type: object
  *                 properties:
  *                   fdcId:
- *                   type: ObjectId
+ *                   type: Number
  *                   example: 454004
  *                 name:
  *                   type: string
