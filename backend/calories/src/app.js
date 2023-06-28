@@ -5,19 +5,23 @@ import mongoose from "mongoose";
 // Swagger
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+//Routers
+import {router as caloriesRouter} from './routes/calories.js';
 
 // Variables
 const app = express();
 
-const port = 20074
+const port = 20074;
+
+const usdaRoute = '/calories'
 
 // Middleware
 app.use(express.json());
 
-app.use(cors({ origin:true }));
+app.use(cors({origin: true}));
 
 // DB
-await mongoose.connect('mongodb://root:example@ss2023_wa_derfruehundderspaetaufsteher_database:27017/')
+await mongoose.connect('mongodb://root:example@ss2023_wa_derfruehundderspaetaufsteher_database:27017/', {dbName: "derfruehundderspaetaufsteher"})
 
 
 //
@@ -42,12 +46,14 @@ const options = {
 
 const specs = swaggerJsDoc(options);
 
+// Routes
+
+app.use(usdaRoute, caloriesRouter)
 app.use(
     "/api-docs",
     swaggerUi.serve,
     swaggerUi.setup(specs)
 );
-
 
 
 app.listen(port, () => {
