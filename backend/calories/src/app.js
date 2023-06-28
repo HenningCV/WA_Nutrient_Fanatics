@@ -13,7 +13,7 @@ const app = express();
 
 const port = 20074;
 
-const usdaRoute = '/calories'
+const calorieRoute = '/calories'
 
 // Middleware
 app.use(express.json());
@@ -48,7 +48,7 @@ const specs = swaggerJsDoc(options);
 
 // Routes
 
-app.use(usdaRoute, caloriesRouter)
+app.use(calorieRoute, caloriesRouter)
 app.use(
     "/api-docs",
     swaggerUi.serve,
