@@ -1,7 +1,6 @@
 // General
 import cors from "cors";
 import express from 'express';
-import mongoose from "mongoose";
 // Swagger
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
@@ -19,10 +18,6 @@ const calorieRoute = '/calories'
 app.use(express.json());
 
 app.use(cors({origin: true}));
-
-// DB
-await mongoose.connect('mongodb://root:example@ss2023_wa_derfruehundderspaetaufsteher_database:27017/', {dbName: "derfruehundderspaetaufsteher"})
-
 
 //
 // Swagger
