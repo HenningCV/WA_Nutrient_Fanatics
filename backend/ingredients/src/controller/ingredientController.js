@@ -1,4 +1,4 @@
-import { Ingredient } from "../models/ingredientsModel.js";
+import {Ingredient} from "../models/ingredientsModel.js";
 
 
 /**
@@ -50,15 +50,14 @@ export const getIngredient = (req, res) => {
         .then(ingredient => {
             if (ingredient) {
                 console.log('Ingredient found: ', ingredient['name']);
-                return res.status(200).json({ ingredient: ingredient });
-            }
-            else {
+                return res.status(200).json({ingredient: ingredient});
+            } else {
                 console.log('Ingredient not found.');
                 res.status(204).json('Ingredient does not exist.');
             }
         })
         .catch(error => {
-            console.error('Error fetching Ingredient: ',error);
+            console.error('Error fetching Ingredient: ', error);
         });
 };
 
@@ -106,15 +105,14 @@ export const getAllIngredients = (req, res) => {
         .then(ingredients => {
             if (ingredients) {
                 console.log('Ingredients found: ', ingredients);
-                return res.status(200).json({ ingredients: ingredients });
-            }
-            else {
+                return res.status(200).json({ingredients: ingredients});
+            } else {
                 console.log('Ingredient not found.');
                 res.status(204).json('Ingredients do not exist.');
             }
         })
         .catch(error => {
-            console.error('Error fetching Ingredient: ',error);
+            console.error('Error fetching Ingredient: ', error);
         });
 };
 
@@ -244,8 +242,7 @@ export const deleteIngredient = async (req, res) => {
 
         console.log('Recipe deleted: ', ingredient);
         res.status(200).json(ingredient);
-    }
-    catch (error) {
+    } catch (error) {
         console.error('Error deleting recipe: ', error);
     }
 };

@@ -34,8 +34,6 @@ services:
     networks:
       - ss2023_wa_derfruehundderspaetaufsteher
     build: ./backend/calories
-    depends_on:
-      - ss2023_wa_derfruehundderspaetaufsteher_database
 
   # INGREDIENTS API
   ss2023_wa_derfruehundderspaetaufsteher_ingredients:
