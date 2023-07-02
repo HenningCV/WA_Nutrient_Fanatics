@@ -1,12 +1,15 @@
 import { Router } from "express";
 
-import { getIngredient, getAllIngredients, createIngredient,  deleteIngredient } from "../controller/ingredientController.js";
+import { getIngredient, getIngredientByName, getAllIngredients, createIngredient,  deleteIngredient } from "../controller/ingredientController.js";
 
 
 const router = Router();
 
 // get ingredient by id
-router.get('/:fdcId', getIngredient);
+router.get('/fdcid/:fdcid', getIngredient);
+
+// get ingredient by name
+router.get('/name/:name', getIngredientByName)
 
 // get all ingredients
 router.get('/', getAllIngredients)

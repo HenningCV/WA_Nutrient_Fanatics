@@ -3,7 +3,7 @@ import {Ingredient} from "../models/ingredientsModel.js";
 
 /**
  * @swagger
- * /ingredients/{fdcId}:
+ * /ingredients/fdcid/{fdcid}:
  *   get:
  *     summary: Finds an ingredient by its fdcId
  *     description: Retrieves the ingredient for a given id from the database
@@ -44,9 +44,69 @@ import {Ingredient} from "../models/ingredientsModel.js";
  *         description: No ingredient for the given ID was found
  */
 export const getIngredient = (req, res) => {
-    const id = req.params['fdcId'];
+    const id = req.params['fdcid'];
 
     Ingredient.find({fdcId: id})
+        .then(ingredient => {
+            if (ingredient) {
+                console.log('Ingredient found: ', ingredient['name']);
+                return res.status(200).json({ingredient: ingredient});
+            } else {
+                console.log('Ingredient not found.');
+                res.status(204).json('Ingredient does not exist.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching Ingredient: ', error);
+        });
+};
+
+/**
+ * @swagger
+ * /ingredients/name/{name}:
+ *   get:
+ *     summary: Finds an ingredient by its name
+ *     description: Retrieves the ingredient for a given name from the database
+ *     parameters:
+ *       - in: path
+ *         name: name
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the ingredient to get
+ *     responses:
+ *       '200':
+ *         description: An ingredient object
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 fdcId:
+ *                   type: Number
+ *                   example: 454004
+ *                 name:
+ *                   type: string
+ *                   example: Apple
+ *                 kcal:
+ *                   type: Number
+ *                   example: 52.0
+ *                 protein_in_g:
+ *                   type: Number
+ *                   example: 0.0
+ *                 fat_in_g:
+ *                   type: Number
+ *                   example: 0.65
+ *                 carb_in_g:
+ *                   type: Number
+ *                   example: 14.3
+ *       '204':
+ *         description: No ingredient for the given ID was found
+ */
+export const getIngredientByName = (req, res) => {
+    const name = req.params['name'];
+
+    Ingredient.find({name: name})
         .then(ingredient => {
             if (ingredient) {
                 console.log('Ingredient found: ', ingredient['name']);
