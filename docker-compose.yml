@@ -85,7 +85,7 @@ services:
       ME_CONFIG_MONGODB_SERVER: ss2023_wa_derfruehundderspaetaufsteher_database
       ME_CONFIG_MONGODB_ADMINUSERNAME: "root"
       ME_CONFIG_MONGODB_ADMINPASSWORD: "example"
-      ME_CONFIG_MONGODB_URL: "mongo://root:example@ss2023_wa_derfruehundderspaetaufsteher_database:27017/"
+      ME_CONFIG_MONGODB_URL: "mongodb://root:example@ss2023_wa_derfruehundderspaetaufsteher_database:27017/"
     depends_on:
       - ss2023_wa_derfruehundderspaetaufsteher_database
 
