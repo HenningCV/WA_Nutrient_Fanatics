@@ -1,6 +1,6 @@
 import {Router} from "express";
 
-import {searchByName, searchByFdcId} from "../controller/calories.js";
+import {searchByName, searchByFdcId} from "../controller/caloriesController.js";
 
 
 const router = Router();
