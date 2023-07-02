@@ -2,10 +2,10 @@ import { RecipesList } from "../recipes/recipesList.jsx";
 
 
 export const Recipes = () => {
-    return <>
+    return (
         <div className="recipes">
             I'm recipes
             <RecipesList />
         </div>
-    </>
+    )
 }
