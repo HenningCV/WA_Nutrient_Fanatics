@@ -16,6 +16,10 @@ const recipeSchema = new schema({
         type: String,
         required: true,
     },
+    instructions: {
+        type: String,
+        required: true,
+    },
     imagePath: {
         type: String,
         required: false,
