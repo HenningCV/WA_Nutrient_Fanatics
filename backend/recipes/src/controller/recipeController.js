@@ -5,15 +5,15 @@ import { Recipe } from "../models/recipe.js";
  * @swagger
  * /recipes/{recipeId}:
  *   get:
- *     summary: Finds a recipe by its id
- *     description: Retrieves the recipe for a given id from the database
+ *     summary: Find recipe by ID
+ *     description: Gets the recipe for a given ID from the database
  *     parameters:
  *       - in: path
  *         name: recipeId
  *         schema:
  *           type: string
  *         required: true
- *         description: ID of the receipt to get
+ *         description: ID of the recipe to get
  *     responses:
  *       '200':
  *         description: Recipe object
@@ -30,7 +30,10 @@ import { Recipe } from "../models/recipe.js";
  *                   example: Scrambled Eggs
  *                 desc:
  *                   type: string
- *                   example: 4 eggs, salt, pepper
+ *                   example: A simple dish for students.
+ *                 instructions:
+ *                   type:
+ *                   example: Mix the 4 eggs with salt and pepper.
  *                 imagePath:
  *                   type: string
  *                   example: ../images/scrambled_eggs.jpg
@@ -64,7 +67,7 @@ export const getRecipe = (req, res) => {
             }
         })
         .catch(error => {
-            console.error('Error fetching recipe: ',error);
+            console.error('Error fetching recipe: ', error);
         });
 };
 
@@ -77,7 +80,7 @@ export const getRecipe = (req, res) => {
  *     description: Get all existing recipes from the database
  *     responses:
  *       '200':
- *         description: Recipe objects
+ *         description: Array of recipe objects
  *         content:
  *           application/json:
  *             schema:
@@ -93,7 +96,10 @@ export const getRecipe = (req, res) => {
  *                     example: Scrambled Eggs
  *                   desc:
  *                     type: string
- *                     example: 4 eggs, salt, pepper
+ *                     example: A simple dish for students.
+ *                   instructions:
+ *                     type:
+ *                     example: Mix the 4 eggs with salt and pepper.
  *                   imagePath:
  *                     type: string
  *                     example: ../images/scrambled_eggs.jpg
@@ -135,7 +141,7 @@ export const getAllRecipes = (req, res) => {
  * @swagger
  * /recipes:
  *   post:
- *     summary: Add a recipe
+ *     summary: Add recipe
  *     description: Add a recipe to the database
  *     requestBody:
  *       required: true
@@ -149,7 +155,10 @@ export const getAllRecipes = (req, res) => {
  *                 example: Scrambled Eggs
  *               desc:
  *                 type: string
- *                 example: 4 eggs, salt, pepper
+ *                 example: A simple dish for students.
+ *               instructions:
+ *                 type:
+ *                 example: Mix the 4 eggs with salt and pepper.
  *               imagePath:
  *                 type: string
  *                 example: ../images/scrambled_eggs.jpg
@@ -181,7 +190,10 @@ export const getAllRecipes = (req, res) => {
  *                   example: Scrambled Eggs
  *                 desc:
  *                   type: string
- *                   example: 4 eggs, salt, pepper
+ *                   example: A simple dish for students.
+ *                 instructions:
+ *                   type:
+ *                   example: Mix the 4 eggs with salt and pepper.
  *                 imagePath:
  *                   type: string
  *                   example: ../images/scrambled_eggs.jpg
@@ -204,6 +216,7 @@ export const createRecipe = async (req, res) => {
     const newRecipe = new Recipe({
         name: req.body['name'],
         desc: req.body['desc'],
+        instructions: req.body['instructions'],
         imagePath: req.body['imagePath'],
         ingredientIds: req.body['ingredientIds'],
         ingredientAmountsInGram: req.body['ingredientAmountsInGram']
@@ -227,7 +240,7 @@ export const createRecipe = async (req, res) => {
  * @swagger
  * /recipes/{recipeId}:
  *   patch:
- *     summary: Update a recipe
+ *     summary: Update recipe
  *     description: Update the information of an existing recipe
  *     parameters:
  *       - in: path
@@ -235,7 +248,7 @@ export const createRecipe = async (req, res) => {
  *         schema:
  *           type: string
  *         required: true
- *         description: ID of the receipt to update
+ *         description: ID of the recipe to update
  *     requestBody:
  *       required: true
  *       content:
@@ -245,8 +258,13 @@ export const createRecipe = async (req, res) => {
  *             properties:
  *               name:
  *                 type: string
+ *                 example: Scrambled Eggs
  *               desc:
  *                 type: string
+ *                 example: A simple dish for students.
+ *               instructions:
+ *                 type:
+ *                 example: Mix the 4 eggs with salt and pepper.
  *               imagePath:
  *                 type: string
  *                 example: ../images/scrambled_eggs.jpg
@@ -278,7 +296,10 @@ export const createRecipe = async (req, res) => {
  *                   example: Scrambled Eggs
  *                 desc:
  *                   type: string
- *                   example: 4 eggs, salt, pepper
+ *                   example: A simple dish for students.
+ *                 instructions:
+ *                   type:
+ *                   example: Mix the 4 eggs with salt and pepper.
  *                 imagePath:
  *                   type: string
  *                   example: ../images/scrambled_eggs.jpg
@@ -320,15 +341,15 @@ export const updateRecipe = async (req, res) => {
  * @swagger
  * /recipes/{recipeId}:
  *     delete:
- *       summary: Delete a recipe
- *       description: Delete a recipe from the database
+ *       summary: Delete recipe
+ *       description: Delete an existing recipe from the database
  *       parameters:
  *         - in: path
  *           name: recipeId
  *           schema:
  *             type: string
  *           required: true
- *           description: ID of the receipt to delete
+ *           description: ID of the recipe to delete
  *       responses:
  *         '200':
  *           description: The deleted recipe object
@@ -345,7 +366,10 @@ export const updateRecipe = async (req, res) => {
  *                     example: Scrambled Eggs
  *                   desc:
  *                     type: string
- *                     example: 4 eggs, salt, pepper
+ *                     example: A simple dish for students.
+ *                   instructions:
+ *                     type:
+ *                     example: Mix the 4 eggs with salt and pepper.
  *                   imagePath:
  *                     type: string
  *                     example: ../images/scrambled_eggs.jpg

@@ -53,8 +53,8 @@ export const getUserIP = async (req, res) => {
  * @swagger
  * /ip/coordinates:
  *   get:
- *     summary: Converts user-IP into geo-coordinates
- *     description: Gets the current user-IP and converts it into latitude and longitude-coordinates
+ *     summary: Convert user-IP into geo-coordinates
+ *     description: Gets the current user-IP and converts it into latitude and longitude-coordinates.
  *     responses:
  *       '200':
  *         description: Converted coordinate-object
@@ -105,7 +105,7 @@ export const convertIPIntoCoordinates = async (req, res) => {
  * /ip/calculate-distance:
  *   get:
  *     summary: Get the distance between your position and the closest supermarket
- *     description: Gets the current user-ip, converts them into geo-coordinates and calculates the distance to the next supermarket
+ *     description: Gets the current user-ip, converts them into geo-coordinates and calculates the distance to the next supermarket. In our example we use static coordinates from the Anger-Rewe as the closest supermarket.
  *     responses:
  *       '200':
  *         description: Distance to the next supermarket
