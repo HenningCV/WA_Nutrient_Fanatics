@@ -4,18 +4,41 @@ const api_key = 'Xxb4xFDH9WKXigQ6yxhYdknrwHKW2U1kcSlNhAWJ';
  * @swagger
  * /calories/get:
  *   get:
- *     summary: get the diffrent nutrients by fcdId
- *     description: placeholder
+ *     summary: get the different nutrients of an ingredient by its fcdid
+ *     description: get the different nutrients of an ingredient by its fcdid
  *     parameters:
  *       - in: query
  *         name: fdcid
  *         schema:
  *           type: string
  *         required: true
- *         description: id of the ingredient of which to get the information of
+ *         description: id of the ingredient for its nutrients
  *     responses:
  *       '200':
- *         description: placeholder
+ *         description: An ingredient object
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 fdcId:
+ *                   type: string
+ *                   example: 454004
+ *                 name:
+ *                   type: string
+ *                   example: Apple
+ *                 kcal:
+ *                   type: number
+ *                   example: 52.0
+ *                 protein_in_g:
+ *                   type: number
+ *                   example: 0.0
+ *                 fat_in_g:
+ *                   type: number
+ *                   example: 0.65
+ *                 carb_in_g:
+ *                   type: number
+ *                   example: 14.3
  *       '204':
  *         description: The given ID doesn't exist in the USDA-database
  */
@@ -68,23 +91,41 @@ export const searchByFdcId = (req, res) => {
  * @swagger
  * /usda/search:
  *   get:
- *     summary: Returns ID of an ingredient
- *     description: Returns the USDA-ID of a given ingredient
+ *     summary: returns nutrients for the asked ingredient
+ *     description: returns nutrients for the asked ingredient
  *     parameters:
  *       - in: query
  *         name: food
  *         schema:
  *           type: string
  *         required: true
- *         description: ID of the ingredient of which to get the information of
+ *         description: name of the ingredient of which to get the nutrients
  *     responses:
  *       '200':
- *         description: ID of the ingredient
+ *         description: An ingredient object
  *         content:
- *           text/plain:
+ *           application/json:
  *             schema:
- *               type: int
- *               example: 454004
+ *               type: object
+ *               properties:
+ *                 fdcId:
+ *                   type: string
+ *                   example: 454004
+ *                 name:
+ *                   type: string
+ *                   example: Apple
+ *                 kcal:
+ *                   type: number
+ *                   example: 52.0
+ *                 protein_in_g:
+ *                   type: number
+ *                   example: 0.0
+ *                 fat_in_g:
+ *                   type: number
+ *                   example: 0.65
+ *                 carb_in_g:
+ *                   type: number
+ *                   example: 14.3
  *       '204':
  *         description: The given ingredient doesn't exist in the USDA-database
  */
