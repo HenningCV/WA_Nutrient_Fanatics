@@ -13,7 +13,7 @@ import {Ingredient} from "../models/ingredientsModel.js";
  *         schema:
  *           type: string
  *         required: true
- *         description: ID of the ingredient to get
+ *         description: fdcid of the ingredient to get
  *     responses:
  *       '200':
  *         description: An ingredient object
@@ -23,25 +23,23 @@ import {Ingredient} from "../models/ingredientsModel.js";
  *               type: object
  *               properties:
  *                 fdcId:
- *                   type: Number
+ *                   type: string
  *                   example: 454004
  *                 name:
  *                   type: string
  *                   example: Apple
  *                 kcal:
- *                   type: Number
+ *                   type: number
  *                   example: 52.0
  *                 protein_in_g:
- *                   type: Number
+ *                   type: number
  *                   example: 0.0
  *                 fat_in_g:
- *                   type: Number
+ *                   type: number
  *                   example: 0.65
  *                 carb_in_g:
- *                   type: Number
+ *                   type: number
  *                   example: 14.3
- *       '204':
- *         description: No ingredient for the given ID was found
  */
 export const getIngredient = (req, res) => {
     const id = req.params['fdcid'];
@@ -73,7 +71,7 @@ export const getIngredient = (req, res) => {
  *         schema:
  *           type: string
  *         required: true
- *         description: ID of the ingredient to get
+ *         description: name of the ingredient to get
  *     responses:
  *       '200':
  *         description: An ingredient object
@@ -83,25 +81,23 @@ export const getIngredient = (req, res) => {
  *               type: object
  *               properties:
  *                 fdcId:
- *                   type: Number
+ *                   type: string
  *                   example: 454004
  *                 name:
  *                   type: string
  *                   example: Apple
  *                 kcal:
- *                   type: Number
+ *                   type: number
  *                   example: 52.0
  *                 protein_in_g:
- *                   type: Number
+ *                   type: number
  *                   example: 0.0
  *                 fat_in_g:
- *                   type: Number
+ *                   type: number
  *                   example: 0.65
  *                 carb_in_g:
- *                   type: Number
+ *                   type: number
  *                   example: 14.3
- *       '204':
- *         description: No ingredient for the given ID was found
  */
 export const getIngredientByName = (req, res) => {
     const name = req.params['name'];
@@ -140,25 +136,23 @@ export const getIngredientByName = (req, res) => {
  *                 type: object
  *                 properties:
  *                   fdcId:
- *                     type: Number
+ *                     type: string
  *                     example: 454004
  *                   name:
  *                     type: string
  *                     example: Apple
  *                   kcal:
- *                     type: Number
+ *                     type: number
  *                     example: 52.0
  *                   protein_in_g:
- *                     type: Number
+ *                     type: number
  *                     example: 0.0
  *                   fat_in_g:
- *                     type: Number
+ *                     type: number
  *                     example: 0.65
  *                   carb_in_g:
- *                     type: Number
+ *                     type: number
  *                     example: 14.3
- *       '204':
- *         description: No ingredients found
  */
 export const getAllIngredients = (req, res) => {
     Ingredient.find({})
@@ -191,17 +185,17 @@ export const getAllIngredients = (req, res) => {
  *             type: object
  *             properties:
  *               fdcId:
- *                 type: Number
+ *                 type: string
  *               name:
  *                 type: string
  *               kcal:
- *                 type: Number
+ *                 type: number
  *               protein_in_g:
- *                 type: Number
+ *                 type: number
  *               fat_in_g:
- *                 type: Number
+ *                 type: number
  *               carb_in_g:
- *                 type: Number
+ *                 type: number
  *     responses:
  *       '201':
  *         description: The created ingredient object
@@ -211,22 +205,22 @@ export const getAllIngredients = (req, res) => {
  *               type: object
  *               properties:
  *                 fdcId:
- *                   type: ObjectId
+ *                   type: string
  *                   example: 454004
  *                 name:
  *                   type: string
  *                   example: Apple
  *                 kcal:
- *                   type: Number
+ *                   type: number
  *                   example: 52.0
  *                 protein_in_g:
- *                   type: Number
+ *                   type: number
  *                   example: 0.0
  *                 fat_in_g:
- *                   type: Number
+ *                   type: number
  *                   example: 0.65
  *                 carb_in_g:
- *                   type: Number
+ *                   type: number
  *                   example: 14.03
  */
 export const createIngredient = async (req, res) => {
@@ -274,22 +268,22 @@ export const createIngredient = async (req, res) => {
  *               type: object
  *               properties:
  *                 fdcId:
- *                   type: Number
+ *                   type: string
  *                   example: 454004
  *                 name:
  *                   type: string
  *                   example: Apple
  *                 kcal:
- *                   type: Number
+ *                   type: number
  *                   example: 52.0
  *                 protein_in_g:
- *                   type: Number
+ *                   type: number
  *                   example: 0.0
  *                 fat_in_g:
- *                   type: Number
+ *                   type: number
  *                   example: 0.65
  *                 carb_in_g:
- *                   type: Number
+ *                   type: number
  *                   example: 14.3
  *       '204':
  *         description: No ingredient for the given ID was found
