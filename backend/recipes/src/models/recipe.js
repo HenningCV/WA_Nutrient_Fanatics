@@ -20,10 +20,10 @@ const recipeSchema = new schema({
         type: String,
         required: true,
     },
-    imagePath: {
+    imageName: {
         type: String,
         required: false,
-        default: '../images/scrambled_eggs.jpg',
+        default: 'scrambled_eggs.jpg',
     },
     ingredientIds: {
         type: [Number],

@@ -34,9 +34,9 @@ import { Recipe } from "../models/recipe.js";
  *                 instructions:
  *                   type:
  *                   example: Mix the 4 eggs with salt and pepper.
- *                 imagePath:
+ *                 imageName:
  *                   type: string
- *                   example: ../images/scrambled_eggs.jpg
+ *                   example: scrambled_eggs.jpg
  *                 ingredientIds:
  *                   type: array
  *                   items:
@@ -100,9 +100,9 @@ export const getRecipe = (req, res) => {
  *                   instructions:
  *                     type:
  *                     example: Mix the 4 eggs with salt and pepper.
- *                   imagePath:
+ *                   imageName:
  *                     type: string
- *                     example: ../images/scrambled_eggs.jpg
+ *                     example: scrambled_eggs.jpg
  *                   ingredientIds:
  *                     type: array
  *                     items:
@@ -159,9 +159,9 @@ export const getAllRecipes = (req, res) => {
  *               instructions:
  *                 type:
  *                 example: Mix the 4 eggs with salt and pepper.
- *               imagePath:
+ *               imageName:
  *                 type: string
- *                 example: ../images/scrambled_eggs.jpg
+ *                 example: scrambled_eggs.jpg
  *               ingredientIds:
  *                 type: array
  *                 items:
@@ -194,9 +194,9 @@ export const getAllRecipes = (req, res) => {
  *                 instructions:
  *                   type:
  *                   example: Mix the 4 eggs with salt and pepper.
- *                 imagePath:
+ *                 imageName:
  *                   type: string
- *                   example: ../images/scrambled_eggs.jpg
+ *                   example: scrambled_eggs.jpg
  *                 ingredientIds:
  *                   type: array
  *                   items:
@@ -217,7 +217,7 @@ export const createRecipe = async (req, res) => {
         name: req.body['name'],
         desc: req.body['desc'],
         instructions: req.body['instructions'],
-        imagePath: req.body['imagePath'],
+        imageName: req.body['imageName'],
         ingredientIds: req.body['ingredientIds'],
         ingredientAmountsInGram: req.body['ingredientAmountsInGram']
     });
@@ -265,9 +265,9 @@ export const createRecipe = async (req, res) => {
  *               instructions:
  *                 type:
  *                 example: Mix the 4 eggs with salt and pepper.
- *               imagePath:
+ *               imageName:
  *                 type: string
- *                 example: ../images/scrambled_eggs.jpg
+ *                 example: scrambled_eggs.jpg
  *               ingredientIds:
  *                 type: array
  *                 items:
@@ -300,9 +300,9 @@ export const createRecipe = async (req, res) => {
  *                 instructions:
  *                   type:
  *                   example: Mix the 4 eggs with salt and pepper.
- *                 imagePath:
+ *                 imageName:
  *                   type: string
- *                   example: ../images/scrambled_eggs.jpg
+ *                   example: scrambled_eggs.jpg
  *                 ingredientIds:
  *                   type: array
  *                   items:
@@ -321,9 +321,9 @@ export const updateRecipe = async (req, res) => {
 
     try {
         const recipe = await Recipe.findByIdAndUpdate(recipeId, {
-            name:                   req.body['name'],
+            name:                    req.body['name'],
             desc:                    req.body['desc'],
-            imagePath:               req.body['imagePath'],
+            imageName:               req.body['imageName'],
             ingredientIds:           req.body['ingredientIds'],
             ingredientAmountsInGram: req.body['ingredientAmountsInGram']
         }, { new: true });
@@ -370,9 +370,9 @@ export const updateRecipe = async (req, res) => {
  *                   instructions:
  *                     type:
  *                     example: Mix the 4 eggs with salt and pepper.
- *                   imagePath:
+ *                   imageName:
  *                     type: string
- *                     example: ../images/scrambled_eggs.jpg
+ *                     example: scrambled_eggs.jpg
  *                   ingredientIds:
  *                     type: array
  *                     items:
