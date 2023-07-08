@@ -222,8 +222,11 @@ export const getAllIngredients = (req, res) => {
  *                 carb_in_g:
  *                   type: number
  *                   example: 14.03
+ *
  */
 export const createIngredient = async (req, res) => {
+
+        const fdcId = req.body['fdcId'];
 
     const newIngredient = new Ingredient({
         fdcId: req.body['fdcId'],
@@ -234,11 +237,19 @@ export const createIngredient = async (req, res) => {
         carb_in_g: req.body['carb_in_g']
     });
 
-    try {
-        const savedIngredient = await newIngredient.save();
+    const ingredientAlreadyExists = await Ingredient.exists({fdcId: fdcId});
 
-        console.log('Ingredient saved: ', savedIngredient);
-        res.status(201).json(savedIngredient);
+    try {
+        if (ingredientAlreadyExists) {
+            console.log('Ingredient already exists');
+            res.status(202).send('Ingredient already exists');
+        } else {
+            const savedIngredient = await newIngredient.save();
+
+            console.log('Ingredient saved: ', savedIngredient);
+            res.status(201).json(savedIngredient);
+        }
+
 
     } catch (error) {
         console.error('Error saving recipe: ', error);
