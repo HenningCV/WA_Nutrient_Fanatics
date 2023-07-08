@@ -20,6 +20,9 @@ export const RecipeDetails = () => {
     const [recipeTotalFat, setRecipeTotalFat] = useState(0.0);
     const [recipeTotalCarb, setRecipeTotalCarb] = useState(0.0);
     const [loading, setLoading] = useState(true);
+    
+    // IP API 
+    const [marketDistance, setMarketDistance] = useState(null);
 
     // Utils
     const [error, setError] = useState(null);
@@ -39,7 +42,7 @@ export const RecipeDetails = () => {
         let index = 0;
 
         // Get Information for every fdc id
-        for (const fdcId of fdcIds){
+        for (const fdcId of fdcIds) {
             console.log("Actual fdcId: " + fdcId);
             const data = await fetch(`http://localhost:20075/ingredients/fdcid/${fdcId}`)
             const json = await data.json();
@@ -75,7 +78,7 @@ export const RecipeDetails = () => {
         console.log("total calories: " + totalCalories);
         const totalProteins = ingredientProteins.reduce((pv, cv) => pv + cv, 0);
         console.log("total proteins: " + totalProteins);
-        const totalFats  = ingredientFats.reduce((pv, cv) => pv + cv, 0);
+        const totalFats = ingredientFats.reduce((pv, cv) => pv + cv, 0);
         console.log("total fats: " + totalFats);
         const totalCarbs = ingredientCarbs.reduce((pv, cv) => pv + cv, 0);
         console.log("total carbs: " + totalCarbs);
@@ -86,13 +89,18 @@ export const RecipeDetails = () => {
         setRecipeTotalProtein(totalProteins);
         setRecipeTotalFat(totalFats);
         setRecipeTotalCarb(totalCarbs);
-    }, [])
+    }, []);
+    const fetchDistance = useCallback(async () => {
+        const data = await fetch('http://localhost:20077/ip/calculate-distance');
+        const distance = await data.text();
+        setMarketDistance(distance);
+    }, []);
     const fetchRecipe = useCallback(async (fdcId) => {
         console.log("Enter fetchRecipe")
         const data = await fetch(`http://localhost:20073/recipes/${fdcId}`);
         const json = await data.json();
         console.log("json: " + json);
-        
+
         // Setting information
         const recipe = json.recipe;
         const recipeName = recipe.name;
@@ -111,39 +119,46 @@ export const RecipeDetails = () => {
         setRecipeImageName(recipeImageName);
         setRecipeIngredientIds(recipeIngredientIds);
         setRecipeIngredientAmounts(recipeIngredientAmounts);
-        
-        await fetchIngredients(recipeIngredientIds, recipeIngredientAmounts)
-    }, [fetchIngredients])
 
-    useEffect( () => {
-         fetchRecipe(recipeId)
+        await fetchIngredients(recipeIngredientIds, recipeIngredientAmounts)
+    }, [fetchIngredients]);
+
+    useEffect(() => {
+        fetchRecipe(recipeId).then(() => fetchDistance())
             .catch(err => setError(err))
             .finally(() => setLoading(false));
-    }, [fetchRecipe, recipeId])
+    }, [fetchDistance, fetchRecipe, recipeId])
 
     return (
-        <div>
+        <section key={"recipePageContent"}>
             {loading && <div>Loading...</div>}
             {error && (
                 <div>{`There is a problem fetching the post data - ${error}`}</div>
             )}
-            <h1 key={"recipeName"}>{recipeName}</h1>
-            <img src={process.env.PUBLIC_URL + "/images/" + recipeImageName} alt={recipeImageName} className={"recipeImage"} />
-            <p key={"recipeDescription"}>{recipeDescription}</p>
-            <h2 key={"instructionsHeader"}>Instructions</h2>
-            <p key={"recipeInstructions"}>{recipeInstructions}</p>
-            <h2 key={"ingredientsHeader"}>Ingredients</h2>
-            <ul key={"ingredientList"}>
-                {recipeIngredientIds && recipeIngredientIds.map((recipeIngredientId, i) => (
-                    <li key={"ingredientId" + i}>{concatIngredient(recipeIngredientAmounts[i], recipeIngredientNames[i])}</li>
-                ))}
-            </ul>
-            <h2 key={"nutrientsHeader"}>Nutrients</h2>
-            <p key={"calories"}>Calories: {recipeTotalCalories} kcal</p>
-            <p key={"proteins"}>Proteins: {recipeTotalProtein} g</p>
-            <p key={"fat"}>Fats: {recipeTotalFat} g</p>
-            <p key={"carbs"}>Carbs: {recipeTotalCarb} g</p>
-        </div>
+            <div key={"recipeContent"}>
+                <h1 key={"recipeName"}>{recipeName}</h1>
+                <img src={process.env.PUBLIC_URL + "/images/" + recipeImageName} alt={recipeImageName}
+                     className={"recipeImage"}/>
+                <p key={"recipeDescription"}>{recipeDescription}</p>
+                <h2 key={"instructionsHeader"}>Instructions</h2>
+                <p key={"recipeInstructions"}>{recipeInstructions}</p>
+                <h2 key={"ingredientsHeader"}>Ingredients</h2>
+                <ul key={"ingredientList"}>
+                    {recipeIngredientIds && recipeIngredientIds.map((recipeIngredientId, i) => (
+                        <li key={"ingredientId" + i}>{concatIngredient(recipeIngredientAmounts[i], recipeIngredientNames[i])}</li>
+                    ))}
+                </ul>
+                <h2 key={"nutrientsHeader"}>Nutrients</h2>
+                <p key={"calories"}>Calories: {recipeTotalCalories} kcal</p>
+                <p key={"proteins"}>Proteins: {recipeTotalProtein} g</p>
+                <p key={"fat"}>Fats: {recipeTotalFat} g</p>
+                <p key={"carbs"}>Carbs: {recipeTotalCarb} g</p>
+            </div>
+            <div key={"nearMarketContent"}>
+                <h2 key={"nearMarketHeaderQuestion"}>No ingredients at home?</h2>
+                <p key={"nearMarketHeaderOffering"}>The next market is only {marketDistance}km away from you!</p>
+            </div>
+        </section>
     )
 }
 
