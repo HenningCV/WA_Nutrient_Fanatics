@@ -7,7 +7,7 @@ const api_key = 'Xxb4xFDH9WKXigQ6yxhYdknrwHKW2U1kcSlNhAWJ';
  *     summary: get the different nutrients of an ingredient by its fcdid
  *     description: get the different nutrients of an ingredient by its fcdid
  *     parameters:
- *       - in: query
+ *       - in: path
  *         name: fdcid
  *         schema:
  *           type: string
@@ -45,10 +45,9 @@ const api_key = 'Xxb4xFDH9WKXigQ6yxhYdknrwHKW2U1kcSlNhAWJ';
 // Get calories
 export const searchByFdcId = (req, res) => {
 
-    let fdc_id = req.query['fdcid'];
-    let amount = req.query['amount'];
+    const fdc_id = req.params['fdcid'];
 
-    console.log('Query Parameter: ' + fdc_id);
+    console.log('Parameter: ' + fdc_id);
 
     fetch(`https://api.nal.usda.gov/fdc/v1/food/${fdc_id}?api_key=${api_key}`)
         .then(response => response.json())
@@ -60,10 +59,10 @@ export const searchByFdcId = (req, res) => {
                 const fatNutrient = foodNutrients.filter(f => f.nutrient.number === "204");
                 const carbNutrient = foodNutrients.filter(f => f.nutrient.number === "205");
 
-                const calories = calorieNutrient[0].amount * 0.01 * amount;
-                const protein = proteinNutrient[0].amount * 0.01 * amount;
-                const fat = fatNutrient[0].amount * 0.01 * amount;
-                const carb = carbNutrient[0].amount * 0.01 * amount;
+                const calories = calorieNutrient[0].amount;
+                const protein = proteinNutrient[0].amount;
+                const fat = fatNutrient[0].amount;
+                const carb = carbNutrient[0].amount;
 
                 console.log(`calories: ${calorieNutrient[0].amount}`);
                 console.log(`protein: ${proteinNutrient[0].amount}`);
@@ -94,8 +93,8 @@ export const searchByFdcId = (req, res) => {
  *     summary: returns nutrients for the asked ingredient
  *     description: returns nutrients for the asked ingredient
  *     parameters:
- *       - in: query
- *         name: food
+ *       - in: path
+ *         name: name
  *         schema:
  *           type: string
  *         required: true
@@ -132,10 +131,9 @@ export const searchByFdcId = (req, res) => {
 // Get ingredient-ID
 export const searchByName = (req, res) => {
 
-    let ingredient = req.query['food'];
-    let amount = req.query['amount']
+    const ingredient = req.params['name'];
 
-    console.log('Query parameter: ' + ingredient);
+    console.log('Parameter: ' + ingredient);
 
     fetch(`https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${api_key}&query=${ingredient}`)
         .then(response => response.json())
@@ -154,10 +152,10 @@ export const searchByName = (req, res) => {
                 const carbNutrient = foodNutrients.filter(f => f.nutrientNumber == "205");
 
 
-                const calories = calorieNutrient[0].value * 0.01 * amount;
-                const protein = proteinNutrient[0].value * 0.01 * amount;
-                const fat = fatNutrient[0].value * 0.01 * amount;
-                const carb = carbNutrient[0].value * 0.01 * amount;
+                const calories = calorieNutrient[0].value;
+                const protein = proteinNutrient[0].value;
+                const fat = fatNutrient[0].value;
+                const carb = carbNutrient[0].value;
 
                 console.log(`Calories: ${calories}`);
                 console.log(`Proteins: ${protein}`);

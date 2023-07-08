@@ -1,7 +1,11 @@
+import {RecipeDetails} from "../recipeDetails/recipeDetails.jsx";
+
+
 export const Recipe = () => {
     return (
-        <div>
-            I'm a recipe
+        <div className="recipes">
+            I'm recipes
+            <RecipeDetails />
         </div>
     )
 }
