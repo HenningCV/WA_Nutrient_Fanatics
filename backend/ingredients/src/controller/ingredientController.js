@@ -44,7 +44,7 @@ import {Ingredient} from "../models/ingredientsModel.js";
 export const getIngredient = (req, res) => {
     const id = req.params['fdcid'];
 
-    Ingredient.find({fdcId: id})
+    Ingredient.findOne({fdcId: id})
         .then(ingredient => {
             if (ingredient) {
                 console.log('Ingredient found: ', ingredient['name']);
@@ -102,7 +102,7 @@ export const getIngredient = (req, res) => {
 export const getIngredientByName = (req, res) => {
     const name = req.params['name'];
 
-    Ingredient.find({name: name})
+    Ingredient.findOne({name: name})
         .then(ingredient => {
             if (ingredient) {
                 console.log('Ingredient found: ', ingredient['name']);
