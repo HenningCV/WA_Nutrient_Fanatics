@@ -1,25 +1,23 @@
 import './App.css';
-import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
-import {Recipes} from "./components/pages/recipes";
-import {Recipe} from "./components/pages/recipe";
-import {Navigation} from "./components/pages/navigation";
-import {AddRecipe} from "./components/pages/addRecipe";
-
+import React from 'react';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Recipes from './components/pages/recipes';
+import Recipe from './components/pages/recipe'
+import AddRecipe from './components/pages/addRecipe';
+import Header from './components/Header';
 
 function App() {
     return (
-        <div>
-            I'm AppJS
-            <BrowserRouter>
+        <Router>
+            <div>
+                <Header />
                 <Routes>
-                    <Route path="/" element={<Navigation/>}/>
-                    <Route path="/recipes" element={<Recipes/>}/>
-                    <Route path="/recipe" element={<Recipe/>}/>
-                    <Route path="/add-recipe" element={<AddRecipe/>}/>
-                    <Route path="*" element={<Navigate to="/"/>}/>
+                    <Route exact path="/" element={<Recipes/>} />
+                    <Route path="/recipe" element={<Recipe/>} />
+                    <Route path="/add-recipe" element={<AddRecipe/>} />
                 </Routes>
-            </BrowserRouter>
-        </div>
+            </div>
+        </Router>
     );
 }
 
