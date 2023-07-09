@@ -88,7 +88,7 @@ export const searchByFdcId = (req, res) => {
 
 /**
  * @swagger
- * /usda/search:
+ * /calories/search:
  *   get:
  *     summary: returns nutrients for the asked ingredient
  *     description: returns nutrients for the asked ingredient
