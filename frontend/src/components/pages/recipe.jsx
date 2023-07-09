@@ -1,11 +1,11 @@
 import {RecipeDetails} from "../recipeDetails/recipeDetails.jsx";
 
 
-export const Recipe = () => {
+function Recipe(){
     return (
         <div className="recipes">
-            I'm recipes
             <RecipeDetails />
         </div>
     )
 }
+ export default Recipe

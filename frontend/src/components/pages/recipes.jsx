@@ -1,11 +1,12 @@
 import { RecipesList } from "../recipes/recipesList.jsx";
 
 
-export const Recipes = () => {
+function Recipes(){
     return (
         <div className="recipes">
-            I'm recipes
             <RecipesList />
         </div>
     )
 }
+
+export default Recipes;
