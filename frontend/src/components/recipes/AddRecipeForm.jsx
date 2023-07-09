@@ -11,7 +11,8 @@ class AddRecipeForm extends React.Component {
             ingredientName: '',
             ingredientAmountsInGram: [],
             ingredientIds: [],
-            ingredients: [{name: '', amount: ''}]
+            ingredients: [{name: '', amount: ''},],
+            submitted: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -83,6 +84,9 @@ class AddRecipeForm extends React.Component {
 
     async handleSubmit(event) {
         event.preventDefault();
+        await this.setState({
+            submitted: true
+        })
         for (const ingredient of this.state.ingredients) {
            await this.getUSDAData(ingredient).catch(err => console.error(err));
         }
@@ -183,7 +187,9 @@ class AddRecipeForm extends React.Component {
                 </button>
                 <br/>
                 <button type="submit">Submit</button>
+                {this.state.submitted && <div>Submitted!</div>}
             </form>
+
         );
     }
 }
