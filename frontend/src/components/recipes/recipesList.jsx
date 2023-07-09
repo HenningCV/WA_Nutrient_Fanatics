@@ -28,11 +28,10 @@ export const RecipesList = () => {
 
 
     return (
-        <div>
-            <h3>Recipes List</h3>
-            { loading && <div>Loading...</div> }
+        <div className="main-content">
+            { loading && <div className="section-loading">Loading...</div> }
             { error && (
-                <div>{`There is a problem fetching the recipes - ${error}`}</div>
+                <div className="section-error">{`There is a problem fetching the recipes - ${error}`}</div>
             )}
             <section className="recipeSection">
                 <div className="recipeRow">

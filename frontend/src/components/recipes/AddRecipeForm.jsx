@@ -1,4 +1,5 @@
 import React from "react";
+import "../../styles/AddRecipeForm.css"
 
 class AddRecipeForm extends React.Component {
     constructor(props) {
@@ -88,7 +89,7 @@ class AddRecipeForm extends React.Component {
             submitted: true
         })
         for (const ingredient of this.state.ingredients) {
-           await this.getUSDAData(ingredient).catch(err => console.error(err));
+            await this.getUSDAData(ingredient).catch(err => console.error(err));
         }
         console.log('A recipe was submitted ' + this.state.name);
         await this.postRecipe().catch(err => console.error(err));
@@ -127,69 +128,48 @@ class AddRecipeForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <h1 key={"RecipeDetails"}>Add recipe</h1>
-                <label key={"nameInput"}>
-                    Name:
-                    <input
-                        type="text"
-                        value={this.state.name}
-                        name="name"
-                        onChange={this.handleChange}
-                    />
-                </label>
-                <br/>
-                <label key={"descriptionInput"}>
-                    Description:
-                    <input
-                        type="text"
-                        value={this.state.desc}
-                        name="desc"
-                        onChange={this.handleChange}
-                    />
-                </label>
-                <br/>
-                <label key={"instructionsInput"}>
-                    Instructions:
-                    <textarea
-                        value={this.state.instructions}
-                        name="instructions"
-                        onChange={this.handleChange}
-                    />
-                </label>
-                <h2 key={"addIngredients"}>Adding ingredients:</h2>
-                {this.state.ingredients.map((ingredient, index) => (
-                    <div key={index}>
-                        <input
-                            type="text"
-                            placeholder="Ingredient"
-                            name="name"
-                            value={ingredient.name}
-                            onChange={this.handleIngredientChange.bind(this, index)}
-                        />
-                        <input
-                            type="number"
-                            placeholder="Amount in g"
-                            name="amount"
-                            value={ingredient.amount}
-                            onChange={this.handleIngredientChange.bind(this, index)}
-                        />
-                        {index > 0 && (
-                            <button type="button" onClick={() => this.removeIngredient(index)}>
-                                Remove
-                            </button>
-                        )}
+            <div className="main-content">
+                <form className="form-container" onSubmit={this.handleSubmit}>
+                    <h2 className="form-title" key={"RecipeDetails"}>Add recipe</h2>
+                    <div className="form-group">
+                        <label className="form-label" key={"nameInput"}>Name:</label>
+                        <input className="form-input" type="text" value={this.state.name} name="name"
+                               onChange={this.handleChange}/>
                     </div>
+                    <div className="form-group">
+                        <label className="form-label" key={"descriptionInput"}>Description:</label>
+                        <input className="form-input" type="text" value={this.state.desc} name="desc"
+                               onChange={this.handleChange}/>
+                    </div>
+                    <div className="form-group">
+                        <label className="form-label" key={"instructionsInput"}>Instructions:</label>
+                        <input className="form-input" type="text" value={this.state.instructions} name="instructions"
+                               onChange={this.handleChange}/>
+                    </div>
+                    <h3 className="form-title" key={"addIngredients"}>Adding ingredients:</h3>
+                    {this.state.ingredients.map((ingredient, index) => (
+                        <div className="form-group" key={index}>
+                            <input className="form-input" type="text" placeholder="Ingredient" name="name"
+                                   value={ingredient.name} onChange={this.handleIngredientChange.bind(this, index)}/>
+                            <input className="form-input" type="number" placeholder="Amount in g" name="amount"
+                                   value={ingredient.amount} onChange={this.handleIngredientChange.bind(this, index)}/>
+                            {index > 0 && (
+                                <button className="form-button" type="button"
+                                        onClick={() => this.removeIngredient(index)}>
+                                    Remove
+                                </button>
+                            )}
+                        </div>
 
-                ))}
-                <button type="button" onClick={this.addIngredient.bind(this)}>
-                    Add ingredient
-                </button>
-                <br/>
-                <button type="submit">Submit</button>
-                {this.state.submitted && <div>Submitted!</div>}
-            </form>
-
+                    ))}
+                    <button className="form-button" type="button" onClick={this.addIngredient.bind(this)}>
+                        Add ingredient
+                    </button>
+                    <br/>
+                    <button className="form-button" type="submit">Submit</button>
+                    {this.state.submitted && <div className="form-label">Submitted!</div>}
+                </form>
+            </div>
         );
     }
 }

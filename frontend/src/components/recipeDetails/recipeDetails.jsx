@@ -1,5 +1,6 @@
 import {useState, useEffect, useCallback} from "react";
 import {useLocation} from "react-router-dom";
+import "../../styles/recipeDetails.css"
 
 export const RecipeDetails = () => {
 
@@ -20,7 +21,7 @@ export const RecipeDetails = () => {
     const [recipeTotalFat, setRecipeTotalFat] = useState(0.0);
     const [recipeTotalCarb, setRecipeTotalCarb] = useState(0.0);
     const [loading, setLoading] = useState(true);
-    
+
     // IP API 
     const [marketDistance, setMarketDistance] = useState(null);
 
@@ -130,35 +131,36 @@ export const RecipeDetails = () => {
     }, [fetchDistance, fetchRecipe, recipeId])
 
     return (
-        <section key={"recipePageContent"}>
-            {loading && <div>Loading...</div>}
+        <div className="main-content">
+            {loading && <div className="section-loading">Loading...</div>}
             {error && (
-                <div>{`There is a problem fetching the post data - ${error}`}</div>
+                <div className="section-error">{`There is a problem fetching the post data - ${error}`}</div>
             )}
-            <div key={"recipeContent"}>
-                <h1 key={"recipeName"}>{recipeName}</h1>
-                <img src={process.env.PUBLIC_URL + "/images/" + recipeImageName} alt={recipeImageName}
-                     className={"recipeImage"}/>
-                <p key={"recipeDescription"}>{recipeDescription}</p>
-                <h2 key={"instructionsHeader"}>Instructions</h2>
-                <p key={"recipeInstructions"}>{recipeInstructions}</p>
-                <h2 key={"ingredientsHeader"}>Ingredients</h2>
-                <ul key={"ingredientList"}>
-                    {recipeIngredientIds && recipeIngredientIds.map((recipeIngredientId, i) => (
-                        <li key={"ingredientId" + i}>{concatIngredient(recipeIngredientAmounts[i], recipeIngredientNames[i])}</li>
-                    ))}
-                </ul>
-                <h2 key={"nutrientsHeader"}>Nutrients</h2>
-                <p key={"calories"}>Calories: {recipeTotalCalories} kcal</p>
-                <p key={"proteins"}>Proteins: {recipeTotalProtein} g</p>
-                <p key={"fat"}>Fats: {recipeTotalFat} g</p>
-                <p key={"carbs"}>Carbs: {recipeTotalCarb} g</p>
-            </div>
-            <div key={"nearMarketContent"}>
-                <h2 key={"nearMarketHeaderQuestion"}>No ingredients at home?</h2>
-                <p key={"nearMarketHeaderOffering"}>The next market is only {marketDistance}km away from you!</p>
-            </div>
+            <section className="section-container" key={"recipePageContent"}>
+                <div className="section-group" key={"recipeContent"}>
+                    <h1 className="section-main-title" key={"recipeName"}>{recipeName}</h1>
+                    <img className="section-image" src={process.env.PUBLIC_URL + "/images/" + recipeImageName} alt={recipeImageName}/>
+                    <p className="section-p" key={"recipeDescription"}>{recipeDescription}</p>
+                    <h2 className="section-title" key={"instructionsHeader"}>Instructions</h2>
+                    <p className="section-p" key={"recipeInstructions"}>{recipeInstructions}</p>
+                    <h2 className="section-title" key={"ingredientsHeader"}>Ingredients</h2>
+                    <ul className="section-list" key={"ingredientList"}>
+                        {recipeIngredientIds && recipeIngredientIds.map((recipeIngredientId, i) => (
+                            <li className="section-list-item" key={"ingredientId" + i}>{concatIngredient(recipeIngredientAmounts[i], recipeIngredientNames[i])}</li>
+                        ))}
+                    </ul>
+                    <h2 className="section-title" key={"nutrientsHeader"}>Nutrients</h2>
+                    <p className="section-p" key={"calories"}>Calories: {recipeTotalCalories} kcal</p>
+                    <p className="section-p" key={"proteins"}>Proteins: {recipeTotalProtein} g</p>
+                    <p className="section-p" key={"fat"}>Fats: {recipeTotalFat} g</p>
+                    <p className="section-p" key={"carbs"}>Carbs: {recipeTotalCarb} g</p>
+                </div>
+                <div className="section-group" key={"nearMarketContent"}>
+                    <h2 className="section-title" key={"nearMarketHeaderQuestion"}>No ingredients at home?</h2>
+                    <p className="section-p" key={"nearMarketHeaderOffering"}>The next market is only {marketDistance}km away from you!</p>
+                </div>
         </section>
+        </div>
     )
 }
 

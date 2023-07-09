@@ -1,0 +1,33 @@
+.logo-svg {
+    width: 100px;
+    height: 100px;
+    fill: #333;
+}
+
+.header {
+    background-color: #f1f1f1;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.header .logo-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.header .nav {
+    margin-left: auto;
+}
+
+.header .nav .page-link {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.header .nav .page-link:hover {
+    color: #555;
+}
