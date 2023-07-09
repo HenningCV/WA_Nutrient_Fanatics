@@ -10,7 +10,6 @@ const recipeSchema = new schema({
     name: {
         type: String,
         required: true,
-        unique: true,
     },
     desc: {
         type: String,
