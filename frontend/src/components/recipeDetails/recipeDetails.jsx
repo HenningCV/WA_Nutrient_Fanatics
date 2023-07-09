@@ -45,7 +45,7 @@ export const RecipeDetails = () => {
         // Get Information for every fdc id
         for (const fdcId of fdcIds) {
             console.log("Actual fdcId: " + fdcId);
-            const data = await fetch(`http://localhost:20075/ingredients/fdcid/${fdcId}`)
+            const data = await fetch(`http://194.94.204.27:20075/ingredients/fdcid/${fdcId}`)
             const json = await data.json();
 
             // Setting information
@@ -92,13 +92,13 @@ export const RecipeDetails = () => {
         setRecipeTotalCarb(totalCarbs);
     }, []);
     const fetchDistance = useCallback(async () => {
-        const data = await fetch('http://localhost:20077/ip/calculate-distance');
+        const data = await fetch('http://194.94.204.27:20077/ip/calculate-distance');
         const distance = await data.text();
         setMarketDistance(distance);
     }, []);
     const fetchRecipe = useCallback(async (fdcId) => {
         console.log("Enter fetchRecipe")
-        const data = await fetch(`http://localhost:20073/recipes/${fdcId}`);
+        const data = await fetch(`http://194.94.204.27:20073/recipes/${fdcId}`);
         const json = await data.json();
         console.log("json: " + json);
 

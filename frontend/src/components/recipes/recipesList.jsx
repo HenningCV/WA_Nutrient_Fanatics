@@ -11,7 +11,7 @@ export const RecipesList = () => {
 
 
     useEffect(() => {
-        fetch('http://localhost:20073/recipes')
+        fetch('http://194.94.204.27:20073/recipes')
             .then(response => response.json())
             .then(data => {
                 if (data) {
@@ -19,7 +19,7 @@ export const RecipesList = () => {
                     setRecipes(data);
                 }
                 else {
-                    console.log("No Response from http://localhost:20073/recipes");
+                    console.log("No Response from http://194.94.204.27:20073/recipes");
                 }
             })
             .catch(err => setError(err.message))

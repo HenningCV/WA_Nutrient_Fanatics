@@ -66,7 +66,7 @@ class AddRecipeForm extends React.Component {
     }
 
     async handleUSDAData(ingredient) {
-        const data = await fetch(`http://localhost:20074/calories/search/${ingredient.name}`);
+        const data = await fetch(`http://194.94.204.27:20074/calories/search/${ingredient.name}`);
         const ingredientData = await data.json();
         console.log('Current fdcId:' + ingredientData.fdcId);
         console.log('Current amount: ' + ingredient.amount)
@@ -96,7 +96,7 @@ class AddRecipeForm extends React.Component {
     }
 
     async postRecipe() {
-        const response = await fetch('http://localhost:20073/recipes', {
+        const response = await fetch('http://194.94.204.27:20073/recipes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ class AddRecipeForm extends React.Component {
     }
 
     async postIngredient(body) {
-        const response = await fetch('http://localhost:20075/ingredients', {
+        const response = await fetch('http://194.94.204.27:20075/ingredients', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
