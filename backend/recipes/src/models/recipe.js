@@ -22,7 +22,7 @@ const recipeSchema = new schema({
     imageName: {
         type: String,
         required: false,
-        default: 'scrambled_eggs.jpg',
+        default: 'recipe.jpg',
     },
     ingredientIds: {
         type: [Number],
