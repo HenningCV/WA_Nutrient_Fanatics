@@ -1,0 +1,56 @@
+/* styles.css */
+
+.main-content {
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.section-loading,
+.section-error {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.section-container {
+    margin-bottom: 20px;
+}
+
+.section-group {
+    margin-bottom: 20px;
+}
+
+.section-main-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.section-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.section-p {
+    margin-bottom: 10px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.section-list {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.section-list-item {
+    margin-bottom: 5px;
+}
+

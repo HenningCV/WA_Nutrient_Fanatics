@@ -1,70 +1,59 @@
-.recipeSection {
-    box-sizing: border-box;
-    display: block;
-    grid-template-columns: minmax(0, 76.25rem);
+.main-content {
+    background-color: #f9f9f9;
+    padding: 20px;
 }
 
+.section-loading,
+.section-error {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.recipeSection {
+    margin-bottom: 20px;
+}
 
 .recipeRow {
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 4rem;
-    align-items: flex-start;
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    box-sizing: border-box;
-    padding-right: 5%;
-    padding-left: 5%;
 }
-
 
 .recipeContainer {
-    width: 100%;
-    height: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    overflow: initial;
-    text-decoration-line: none;
+    width: 48%;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
-
 
 .recipeImage {
     width: 100%;
-    height: 50%;
-    display: block;
-    object-fit: cover;
-    box-sizing: border-box;
-    position: relative;
-    padding: 0;
+    height: auto;
+    margin-bottom: 10px;
 }
 
 .recipeContent {
-    width: 100%;
-    display: flex;
-    box-sizing: border-box;
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-    flex-grow: 1;
-    order: 2;
+    text-align: center;
 }
-
 
 .recipeName {
-    display: inline-block;
-    order: 1;
-    box-sizing: border-box;
-    line-height: 2em;
-    color: #000;
-    text-decoration-color: #d54215;
-    text-decoration-thickness: 1px;
-    font-size: 1.5rem;
-    font-weight: 700;
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: #333;
 }
 
+.recipeName:hover {
+    color: #555;
+}
 
 .recipeDesc {
-    display: inline-block;
-    order: 2;
-    box-sizing: border-box;
+    font-size: 14px;
 }
