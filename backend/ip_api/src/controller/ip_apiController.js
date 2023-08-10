@@ -1,5 +1,5 @@
 
-const api_key = '38785147a4msha98e770b4549d36p152685jsne7396351e0a5';
+const api_key = 'need new api key';
 
 // Variables
 let user_ip = '';
